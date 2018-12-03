@@ -1,4 +1,4 @@
-host "www.bus4x4.com.au"
+host ENV["RAILS_DEFAULT_HOST"]
 
 sitemap :site do
   url root_url, last_mod: Time.now, change_freq: "daily", priority: 1.0

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.1'
@@ -43,17 +43,7 @@ gem 'spring', group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-group :development do
-  gem 'capistrano',  '~> 3.3.5'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-end
+gem 'unicorn'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
@@ -81,7 +71,7 @@ gem 'truncate_html'
 gem 'will_paginate', '~> 3.0.6'
 
 # new relic for application monitoring
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 
 # dynamic_sitemaps for sitemap
 gem 'dynamic_sitemaps'
@@ -89,10 +79,24 @@ gem 'dynamic_sitemaps'
 # whenever for cron
 gem 'whenever', :require => false
 
+# OpsCare gems
+gem 'asset_sync'
+gem 'fog-aws'
+gem "ops_care", git: "git@github.com:reinteractive/OpsCare.git", branch: "master"
+
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'simplecov'
+end
+
+# Use Capistrano for deployment
+group :development do
+  gem 'capistrano',  '~> 3.3.5'
+  gem 'capistrano-rails', '~> 1.1'
+  gem 'capistrano-passenger'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
 end
 
 group :development, :test do
@@ -102,4 +106,5 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'byebug'
+  gem 'dotenv-rails'
 end
