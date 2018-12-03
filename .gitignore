@@ -16,7 +16,7 @@
 /tmp
 
 # Ignore secrets.yml
-secrets.yml
+#secrets.yml
 
 # Ignore database.yml
 database.yml
