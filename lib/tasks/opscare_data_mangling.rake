@@ -24,15 +24,15 @@ namespace :opscare do
       end
 
       # Get the DB config if you're calling it directly
-      # db = get_db_config(ENV["RAILS_ENV"])
+      db = get_db_config(ENV["RAILS_ENV"])
 
       # Example action: adding ".local" at the end of the user.email field
       # (beware it will also edit your admin user account):
 
       # puts "Mangling emails addresses by appending '.local'"
-      # %w( users ).each do |table|
-      #   %x[ export PGPASSWORD=#{db['password']}; psql -h #{db['host']} -U #{db['username']} #{db['database']} -c "update #{table} set email= email || '.local' where email not like '%.local';" ]
-      # end
+      %w( users ).each do |table|
+        %x[ mysql -h #{db['host']} -u #{db['username']} -p#{db['password']} #{db['database']} -e "UPDATE users SET email= CONCAT(email, '.local') WHERE NOT (email LIKE '%.local' OR email LIKE '%@reinteractive.net' OR email LIKE '%@bus4x4.com.au');" ]
+      end
     end # task :mangle
   end # namespace :data
 end # namespace :opscare
