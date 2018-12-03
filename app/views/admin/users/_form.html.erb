@@ -1,0 +1,117 @@
+<div class="row">
+  <%= form_for([:admin, @user]) do |f| %>
+    <div class="col-md-12">
+      <%= render 'admin/shared/forms/errors', model: @user %>
+    </div>
+
+    <div class="col-md-8">
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :role, class: "form-label" %>
+            <div class="controls">
+              <%= f.collection_select :role, User::ROLES, :to_s, Proc.new {|v| v.to_s.humanize}, :prompt => true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :first_name, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :first_name, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :last_name, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :last_name, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :email, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <% if f.object.avatar_url %>
+              <%= image_tag f.object.avatar_url(:medium), "data-src" => "#{image_path f.object.avatar_url(:medium)}", "data-src-retina" => "#{image_path f.object.avatar_url(:medium2x)}" %>
+            <% else %>
+              <%= f.label :avatar, class: "form-label" %>
+            <% end %>
+            <div class="controls">
+              <%= f.file_field :avatar, style: "border:none" %>
+              <%= f.hidden_field :avatar_cache %>
+            </div>
+          </div>
+
+          <% unless @user.id %>
+            <div class="form-group">
+              <%= f.label :password, class: "form-label" %>
+              <div class="controls">
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, "Confirm Password", class: "form-label" %>
+              <div class="controls">
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+              </div>
+            </div>
+          <% end %>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+    </div><%# /col-md-8 %>
+
+    <div class="col-md-4">
+      <div class="grid simple">
+        <div class="grid-body">
+          <% if @user.id %>
+            <%= submit_tag 'Update', class: "btn btn-danger btn-block" %>
+          <% else %>
+            <%= submit_tag 'Save', class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-4 %>
+  <% end %><%# /form %>
+
+  <% if @user.id %>
+    <%= form_for([:admin, @user]) do |f| %>
+      <div class="col-md-4">
+        <div class="grid simple closed">
+          <div class="grid-title no-border">
+            <h4>Reset Password</h4>
+            <div class="tools">
+              <a href="javascript:;" class="expand"></a>
+            </div>
+          </div>
+          <div class="grid-body no-border">
+
+            <div class="form-group">
+              <%= f.label :password, class: "form-label" %>
+              <div class="controls">
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation, "Confirm Password", class: "form-label" %>
+              <div class="controls">
+                <%= f.password_field :password_confirmation, class: "form-control" %>
+              </div>
+            </div>
+
+            <%= submit_tag 'Update Password', class: "btn btn-primary btn-block" %>
+          </div><%# /grid-body %>
+        </div><%# /grid %>
+      </div><%# /col-md-4 %>
+    <% end %><%# /form %>
+  <% end %>
+
+</div><%# /row %>

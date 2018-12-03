@@ -1,0 +1,83 @@
+<div class="page-sidebar" id="main-menu">
+  <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
+    <p class="menu-title">NAVIGATION</p>
+    <ul>
+      <li class="start <%= "active" if params[:controller] == "admin/dashboard" %>">
+        <%= link_to content_tag(:i, "", class: "icon-custom-home") + content_tag(:span, "Dashboard", class: "title"), admin_dashboard_url %>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/posts" || params[:controller] == "admin/post_categories" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-thumb-tack") + content_tag(:span, "Posts", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/posts" || params[:controller] == "admin/post_categories"}"), admin_posts_url %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/posts" && params[:action] == "index" %>"><%= link_to "All Posts", admin_posts_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/posts" && params[:action] == "new" %>"><%= link_to "Add New", new_admin_post_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/post_categories" %>"><%= link_to "Categories", admin_post_categories_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/pages" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-code") + content_tag(:span, "Pages", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/pages"}"), admin_pages_url %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/pages" && params[:action] == "index" %>"><%= link_to "All Pages", admin_pages_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/pages" && params[:action] == "new" %>"><%= link_to "Add New", new_admin_page_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/promotions" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-code") + content_tag(:span, "Promotions", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/promotions"}"), admin_promotions_url %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/promotions" && params[:action] == "index" %>"><%= link_to "All Promotions", admin_promotions_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/media" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-film") + content_tag(:span, "Media", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/media"}"), "#" %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/media" && params[:action] == "documents" %>"><%= link_to "Documents", admin_media_documents_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/media" && params[:action] == "pictures" %>"><%= link_to "Pictures", admin_media_pictures_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/vehicles" || params[:controller] == "admin/vehicle_filters" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-car") + content_tag(:span, "Vehicles", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/vehicles"}"), admin_vehicles_url %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/vehicles" && params[:action] == "index" %>"><%= link_to "All Vehicles", admin_vehicles_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/vehicles" && params[:action] == "new" %>"><%= link_to "Add New", new_admin_vehicle_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/vehicle_filters" %>"><%= link_to "Filters", admin_vehicle_filters_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active open" if params[:controller] == "admin/products" || params[:controller] == "admin/product_categories" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-shopping-cart") + content_tag(:span, "Products", class: "title") + content_tag(:span, "", class: "arrow #{'open' if params[:controller] == "admin/products"}"), admin_products_url %>
+        <ul class="sub-menu">
+          <li class="<%= "active" if params[:controller] == "admin/products" && params[:action] == "index" %>"><%= link_to "All Products", admin_products_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/products" && params[:action] == "new" %>"><%= link_to "Add New", new_admin_product_url %></li>
+          <li class="<%= "active" if params[:controller] == "admin/product_categories" %>"><%= link_to "Categories", admin_product_categories_url %></li>
+        </ul>
+      </li>
+
+      <li class="<%= "active" if params[:controller] == "admin/galleries" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-picture-o") + content_tag(:span, "Feature Galleries", class: "title"), admin_galleries_url %>
+      </li>
+
+      <li class="<%= "active" if params[:controller] == "admin/links" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-link") + content_tag(:span, "Links", class: "title"), admin_links_url %>
+      </li>
+
+      <li class="<%= "active" if params[:controller] == "admin/users" %>">
+        <%= link_to content_tag(:i, "", class: "fa fa-users") + content_tag(:span, "Users", class: "title"), admin_users_url %>
+      </li>
+    </ul>
+    <div class="clearfix"></div>
+  </div><!-- /main-menu-wrapper -->
+</div><!-- /main-menu page-sidebar -->
+
+<a href="#" class="scrollup">Scroll</a>
+
+<% if current_user %>
+  <div class="footer-widget">
+    <div class="pull-right">
+    <%= link_to content_tag(:i, "", class: "fa fa-power-off"), destroy_user_session_path, method: :delete, data: {confirm: "Are you sure you want to logout?"}  %>
+    </div>
+  </div><!-- /footer-widget -->
+<% end %>

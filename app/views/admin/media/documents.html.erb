@@ -1,0 +1,100 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa fa-file-text"></i>
+        <h3>Documents <span class="semi-bold">Library</span></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Documents <span class="semi-bold">Library</span></h4>
+
+              <div class="bulk-options">
+                <%= form_tag admin_media_bulk_destroy_documents_path, id: "bulk-destroy-form", class: "bulk-action-form" do %>
+                  <%= submit_tag "Remove Selected", name: nil, id: "bulk-destroy-btn", class: "btn btn-mini btn-danger" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="grid-body no-border">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width:1%" >
+                      <div class="checkbox check-default">
+                        <input id="checkbox" type="checkbox" value="1" class="checkall">
+                        <label for="checkbox"></label>
+                      </div>
+                    </th>
+                    <th width="40%">File</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Filesize</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @documents.each do |document| %>
+                    <tr>
+                      <td class="v-align-middle">
+                        <div class="checkbox check-default">
+                          <input id="checkbox<%= document.id %>" class="row-checkbox" data-id="<%= document.id %>" type="checkbox" value="1">
+                          <label for="checkbox<%= document.id %>"></label>
+                        </div>
+                      </td>
+                      <td>
+                        <%= link_to document.data_file_name, image_path(document.data_url) %>
+                        <div class="hover-actions">
+                          <div>
+                            <%= link_to 'View', image_path(document.data_url), class: 'btn btn-primary btn-mini' %>
+                            <%= link_to 'Delete Permanently', redactor_rails_document_path(document), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <%= document.user.name if document.user %>
+                      </td>
+                      <td><%= "#{time_ago_in_words(document.updated_at)} ago" %></td>
+                      <td><span class="small muted">(<%= number_to_human_size(document.data_file_size) %>)</span></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div><!-- /grid-body -->
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Upload <span class="semi-bold">Documents</span> <span class="muted"><%= RedactorRails.document_file_types.join('| ') %></span></h4>
+            </div>
+
+            <div class="grid-body no-border">
+              <div class="row-fluid">
+                <%= form_for [:redactor_rails, RedactorRails.document_model.new], html: {class: "dropzone no-margin", multipart: true} do %>
+                  <div class="fallback">
+                    <%= file_field_tag 'data', multiple: true %>
+                  </div>
+                <% end %>
+              </div>
+            </div><!-- /grid-body -->
+
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+
+    </div><!-- /content -->
+  </div><!-- /page-content -->
+
+</div><!-- /page-container -->
+

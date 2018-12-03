@@ -1,0 +1,55 @@
+<%= form_for([:admin, @gallery]) do |f| %>
+  <%= render 'admin/shared/forms/errors', model: @gallery %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :name, "Gallery Name", class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :name, class: "form-control slug-title" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :shortcode, class: "form-label" %>
+            <%= content_tag :span, "Shortcode used to embed gallery must be unique ".html_safe + link_to("(edit)", "#", class: "edit-slug-btn"), class: "help" %>
+            <div class="controls">
+              <%= f.text_field :shortcode, class: "form-control slug", readonly: true %>
+            </div>
+          </div>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+    </div><%# /col-md-8 %>
+
+    <div class="col-md-4">
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :gallery_type, class: "form-label" %>
+            <div class="controls">
+              <%= f.collection_select :gallery_type, Gallery::TYPES, :to_s, Proc.new {|v| v.to_s.humanize} %>
+            </div>
+          </div>
+
+          <% if @gallery.id %>
+            <%= submit_tag 'Update', class: "btn btn-danger btn-block" %>
+          <% else %>
+            <%= submit_tag 'Save', class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-4 %>
+  </div><%# /row %>
+
+  <div class="row">
+    <%= f.fields_for :slides do |builder| %>
+      <%= render 'slide_fields', f: builder %>
+    <% end %>
+
+    <%= link_to_add_fields "Add New Slide", f, :slides %>
+  </div><%# /row %>
+<% end %><%# /form %>

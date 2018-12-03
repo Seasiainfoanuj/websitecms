@@ -1,0 +1,147 @@
+<% content_for :title, @vehicle.title %>
+<% content_for :meta do %>
+  <% if @vehicle.meta_description %>
+    <meta name="description" content="<%= @vehicle.meta_description %>">
+  <% end %>
+  <% if @vehicle.meta_keywords %>
+    <meta name="keywords" content="<%= @vehicle.meta_keywords %>">
+  <% end %>
+<% end %>
+
+<div id="page-header" class="vehicle-page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right">
+      <%= link_to "Enquire Now", "#", class: "enquire-link", data: {meta: @vehicle.title} %>
+      <%= link_to "Explore ".html_safe + content_tag(:i, '', class: "glyphicon glyphicon-th"), "#", class: "explore-link" if @vehicle.related_vehicles.present? %>
+    </div>
+  </div>
+
+  <%= render 'shared/explore' %>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="feature-slider">
+  <div class="container">
+    <% if @gallery %>
+      <%= render 'shared/feature_slider' %>
+    <% elsif @vehicle.featured_image.present? %>
+      <%= image_tag @vehicle.featured_image_url(:large), width: "100%" %>
+    <% end %>
+  </div><%# /container %>
+</div><%# /feature-slider %>
+
+<div id="vehicle-info">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+
+          <ul class="info-tabs <%= @vehicle.features.present? ? "three-info-tabs" : "two-info-tabs" %>">
+            <li class="info-tab active"><a href="#overview">Overview</a></li>
+            <% if @vehicle.features.present? %>
+              <li class="info-tab"><a href="#features">Features and Options</a></li>
+            <% end %>
+            <li class="info-tab"><a href="#specs">Specifications</a></li>
+          </ul>
+
+          <div class="vehicle-title">
+            <h1><%= @vehicle.title.html_safe %></h1>
+          </div>
+
+          <div id="overview" class="info-box active">
+            <div class="info-box-title">
+              <h2>Overview <i class="glyphicon glyphicon-plus pull-right"></i></h2>
+            </div>
+            <div class="info-box-content">
+              <div class="row">
+                <div class="col-md-8">
+                  <%= @vehicle.overview.html_safe if @vehicle.overview.present? %>
+                </div>
+                <div class="col-md-4">
+                  <table>
+                    <tbody>
+                      <% if @vehicle.make.present? || @vehicle.model.present? %>
+                        <tr>
+                          <td><b>Make / Model:</b></td>
+                          <td><%= "#{@vehicle.make} #{@vehicle.model}" %></td>
+                        </tr>
+                      <% end %>
+
+                      <% if @vehicle.specification.present? %>
+                        <tr>
+                          <td><b>Spec Options:</b></td>
+                          <td><%= @vehicle.specification %></td>
+                        </tr>
+                      <% end %>
+
+                      <% if @vehicle.seating_capacity.present? %>
+                        <tr>
+                          <td><b>Seating Capacity:</b></td>
+                          <td><%= @vehicle.seating_capacity %></td>
+                        </tr>
+                      <% end %>
+
+                      <% if @vehicle.kit.present? %>
+                        <tr>
+                          <td><b>4x4 Kit:</b></td>
+                          <td><%= @vehicle.kit %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                  <% if @vehicle.manufacturer_logo_url.present? %>
+                    <p><b>Brought to you by:</b></p>
+                    <%= image_tag @vehicle.manufacturer_logo_url(:small) %>
+                  <% end %>
+
+                  <% if @vehicle.brochure.present? %>
+                    <p class="vehicle-brochure">
+                      <a href="<%= @vehicle.brochure_url %>">
+                        <%= image_tag "download_brochure_icon.png" %>
+                      </a>
+                    </p>
+                  <% end %>                  
+                </div>
+              </div>
+            </div>
+          </div><!-- #overview -->
+
+          <% if @vehicle.features.present? %>
+
+            <div id="features" class="info-box">
+              <div class="info-box-title">
+                <h2>Features and Options <i class="glyphicon glyphicon-plus pull-right"></i></h2>
+              </div>
+              <div class="info-box-content">
+                <div class="row">
+                  <div class="col-md-12">
+                    <%= @vehicle.features.html_safe %>
+                  </div>
+                </div>
+              </div>
+            </div><!-- #features -->
+
+          <% end %>
+
+          <div id="specs" class="info-box">
+            <div class="info-box-title">
+              <h2>Specifications <i class="glyphicon glyphicon-plus pull-right"></i></h2>
+            </div>
+            <div class="info-box-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <%= @vehicle.specifications.html_safe if @vehicle.specifications.present? %>
+                </div>
+              </div>
+            </div>
+          </div><!-- #specs -->
+
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>
+
+<%= render 'shared/enquire_model' %>

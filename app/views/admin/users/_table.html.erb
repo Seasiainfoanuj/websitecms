@@ -1,0 +1,29 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th width="1%"></th>
+      <th width="30%">Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.avatar_url(:small), "data-src" => "#{image_path user.avatar_url(:small)}", "data-src-retina" => "#{image_path user.avatar_url(:small2x)}", width: "35px", height: "35px" %></td>
+        <td>
+          <%= link_to "#{user.first_name} #{user.last_name}", edit_admin_user_path(user) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

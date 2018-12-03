@@ -1,0 +1,18 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa-code"></i>
+        <h3>Edit Vehicle <span class="semi-bold">Filters</span> <%= link_to 'Add New', new_admin_vehicle_filter_path, class: "btn btn-default btn-mini" %></h3>
+      </div>
+
+      <%= render 'form' %>
+
+    </div><%# /content %>
+  </div><%# /page-content %>
+
+</div><%# /page-container %>

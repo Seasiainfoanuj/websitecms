@@ -1,0 +1,88 @@
+<% content_for :title, params[:search] ? "Search: #{params[:search]}" : "Search" %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <%= form_tag search_path, method: 'get', class: "global-search-form" do %>
+            <div class="global-search-input">
+              <%= text_field_tag :search, params[:search], class: "search-input", placeholder: "Search something...", autocomplete: "off", autocorrect: "off", autocapitalize: "off" %>
+            </div>
+            <%= submit_tag "Search", name: nil, class: "submit-btn" %>
+          <% end %>
+        </div>
+      </div>
+
+      <p class="search-summary">
+        <% if @count > 0 %>
+          Displaying <b><%= pluralize(@count, "search result") %></b> <%= "for: #{params[:search]}" if params[:search].present? %>
+        <% else %>
+          <% if params[:search].present? %>
+            No search results found <%= "for: #{params[:search]}" if params[:search].present? %>
+          <% end %>
+        <% end %>
+      </p>
+
+      <div class="row">
+        <div class="col-md-12 global-search-results">
+          <% if @vehicles.present? %>
+            <h1 class="search-result-group-title">Our Range</h1>
+            <% @vehicles.each do |vehicle| %>
+              <div class="search-result vehicle-search-result">
+                <%= image_tag vehicle.featured_image_url(:thumb), class: "search-result-thumb", width: 180, height: 120 if vehicle.featured_image_url.present? %>
+                <h2 class="search-result-title"><%= link_to vehicle.title, vehicle_path(slug: vehicle.slug) %></h2>
+                <%= truncate(strip_tags(vehicle.overview), length: 500) %>
+              </div>
+
+              <div class="clr"></div>
+            <% end %>
+          <% end %>
+
+          <% if @products.present? %>
+            <h1 class="search-result-group-title">Products</h1>
+            <% @products.each do |product| %>
+              <div class="search-result product-search-result">
+                <%= image_tag product.featured_image_url(:thumb), class: "search-result-thumb", width: 180, height: 120 if product.featured_image_url.present? %>
+                <h2 class="search-result-title"><%= product.categories.first.present? ? link_to(product.title, product_path(category_slug: product.categories.first.slug, product_slug: product.slug)) : product.title %></h2>
+                <span class="meta-info">
+                  <% product.categories.each do |category| %>
+                    <%= link_to category.name, store_path(category_slug: category.slug) %>
+                  <% end %>
+                </span>
+                <%= truncate(strip_tags(product.overview), length: 500) %>
+              </div>
+
+              <div class="clr"></div>
+            <% end %>
+          <% end %>
+
+          <% if @pages.present? %>
+            <h1 class="search-result-group-title">Web Pages</h1>
+            <% @pages.each do |page| %>
+              <div class="search-result page-search-result">
+                <h2 class="search-result-title"><%= link_to page.title, page_path(slug: page.slug) %></h2>
+                <%= truncate(strip_tags(page.content), length: 500) %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if @posts.present? %>
+            <h1 class="search-result-group-title">Blog Posts</h1>
+            <% @posts.each do |post| %>
+              <div class="search-result post-search-result">
+                <h2 class="search-result-title"><%= link_to post.title, post_path(slug: post.slug) %></h2>
+                <span class="meta-info">Posted on <%= format_date(post.published_on) %></span>
+                <%= truncate(strip_tags(post.content), length: 500) %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <br><br>
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>

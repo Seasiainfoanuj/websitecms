@@ -1,0 +1,102 @@
+section.contact-us
+  .enquiry-form-response
+
+  = form_tag send_enquiry_path, method: 'get', remote: true, class: "enquiry-form", id: "enquiry-form" do
+    = hidden_field_tag :source_application, 'cms'
+
+    h3 Send An Enquiry
+    .row
+      .col-md-12
+        .form-group
+          = text_field_tag :first_name, nil, class: "form-control name", placeholder: "*First name"
+          = text_field_tag :last_name, nil, class: "form-control name", placeholder: "*Last name"
+    .row      
+      .col-md-12
+        .form-group
+          = text_field_tag :email, nil, class: "form-control", placeholder: "*Email"
+    .row
+      .col-md-12
+        .form-group
+          = text_field_tag :phone, nil, class: "form-control phone", placeholder: "*Phone"
+          = text_field_tag :company, nil, class: "form-control company", placeholder: "Company name"
+    .row
+      .col-md-12
+        .form-group.horizontal
+          = label_tag :hire_period, "*How did you find us?", class: "form-label find-us"
+          = select_tag :find_us, options_for_select(['Social media','Bus 4x4 websites','Referrals','Magazine ads','Online ads','Others'],{:prompt => 'Select Person'}), class: "form-control find-us-drop"
+    
+    ul#tabs.nav.nav-tabs data-tabs="tabs"
+      li.sales.active data-toggle="presentation"
+        a href="#sales-tab" data-toggle="tab" I want to buy 
+      li.hire data-toggle="presentation"
+        a href="#hire-tab" data-toggle="tab" I want to hire
+    
+    .tab-content
+      #sales-tab.tab-pane.active
+        .row
+          .col-md-12
+            .form-group
+              = select_tag :enquiry_type_id, nil, class: "enquiry_types_select form-control"
+
+        .row
+          .col-md-12
+            .form-group
+              = text_area_tag :details, nil, id: "enquiry-form-details", class: "form-control", placeholder: "How can we help you?", rows: 5
+        .row
+          .col-md-12
+            .form-group.subscribe
+              = check_box_tag "subscribe_to_newsletter", nil, false
+              = label_tag "subscribe_to_newsletter", 'Yes, please add me to the BUS 4x4 newsletter list.'
+
+      #hire-tab.tab-pane
+        .sub-header
+          = hidden_field_tag :number_of_vehicles, 1
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :hire_start_date, "*Hire start date", class: "form-label"
+              = text_field_tag :hire_start_date, nil, class: "form-control date", value: (Date.today + 1.week).strftime("%d/%m/%Y"), data: { behaviour: 'datepicker' }
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :ongoing_contract, "Ongoing contract?", class: "form-label"
+              = check_box_tag :ongoing_contract, nil, false
+              span = ' (No end date forseen)'
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :hire_period, "Hire period", class: "form-label hire-period"
+              = text_field_tag :units, nil, class: "form-control number"
+              = select_tag :duration_unit, options_for_select(['days','weeks','months','years'], 'weeks'), class: "form-control"
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :minimum_seats, "Minimum seats", class: "form-label"
+              = text_field_tag :minimum_seats, nil, class: "form-control number"
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :delivery_required, "Delivery required?", class: "form-label"
+              = check_box_tag :delivery_required, "1", class: "form-control check"
+              = text_field_tag :delivery_location, nil, class: "form-control mobilisation", id: 'delivery-location', placeholder: "*Delivery location"
+        .row
+          .col-md-12
+            .form-group.horizontal
+              = label_tag :transmission_preference, "Transmission", class: "form-label"
+              = select_tag :transmission_preference, options_for_select(['No Preference', 'Automatic', 'Manual', 'Automated Manual']), class: "form-control"
+        .row
+          .col-md-12
+            .form-group
+              = text_area_tag :special_requirements, nil, class: "form-control", placeholder: 'Any special accessories like wheelchair access, mining, seating, high-low range, etc. (max of 255 letters)', rows: 4
+        
+        
+        .row
+          .col-md-12
+            .form-group.subscribe
+              = check_box_tag "subscribe_to_newsletter", nil, true
+              = label_tag "subscribe_to_newsletter", 'Yes, please add me to the BUS 4x4 newsletter list.'
+
+    .row
+      .col-md-12
+        .actions
+          = button_tag "Send message", class: "submit-btn btn btn-primary"

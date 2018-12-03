@@ -1,0 +1,46 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="p-t-20 p-l-30 p-r-30 xs-p-t-10 xs-p-l-10">
+    <h2>Sign in</h2>
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+    <p class="alert"><%= alert %></p>
+    <% end %>
+  </div>
+
+  <div class="tiles white p-t-10 p-b-20">
+    <div class="row p-t-10 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+      <div class="col-md-6 col-sm-6 ">
+        <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
+      </div>
+
+      <div class="col-md-6 col-sm-6">
+        <%= f.password_field :password, class: "form-control", autocomplete: "off", placeholder: "Password" %>
+      </div>
+
+    </div>
+    <div class="row p-t-20 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+      <div class="control-group">
+        <div class="col-md-6 col-sm-6 ">
+          <%= f.submit "Log in", class: "btn btn-primary btn-cons" %>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <% if devise_mapping.rememberable? -%>
+            <div class="checkbox checkbox check-success p-t-10">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end -%>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-t-20 p-b-20 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+      <div class="col-md-12">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+<% end %>

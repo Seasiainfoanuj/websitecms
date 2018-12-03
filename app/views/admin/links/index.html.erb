@@ -1,0 +1,36 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa-link"></i>
+        <h3><span class="semi-bold">Links</span> <%= link_to 'Add New', new_admin_link_path, class: "btn btn-primary btn-mini" %></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4><span class="semi-bold">Links</span></h4>
+
+              <div class="bulk-options">
+                <%= form_tag bulk_destroy_admin_links_path, id: "bulk-destroy-form", class: "bulk-action-form" do %>
+                  <%= submit_tag "Remove Selected", name: nil, id: "bulk-destroy-btn", class: "btn btn-mini btn-danger" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="grid-body no-border">
+              <%= render "table" %>
+              <%= render 'admin/shared/pagination', model: @links %>
+            </div><!-- /grid-body -->
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+    </div><!-- /content -->
+  </div><!-- /page-content -->
+
+</div><!-- /page-container -->

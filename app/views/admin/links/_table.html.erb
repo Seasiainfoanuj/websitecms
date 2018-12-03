@@ -1,0 +1,43 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:1%" >
+        <div class="checkbox check-default">
+          <input id="checkbox" type="checkbox" value="1" class="checkall">
+          <label for="checkbox"></label>
+        </div>
+      </th>
+      <th width="30%">Title</th>
+      <th>Url</th>
+      <th>New window</th>
+      <th>Order</th>
+      <th>Show in footer</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @links.each do |link| %>
+      <tr>
+        <td class="v-align-middle">
+          <div class="checkbox check-default">
+            <input id="checkbox<%= link.id %>" class="row-checkbox" data-id="<%= link.id %>" type="checkbox" value="1">
+            <label for="checkbox<%= link.id %>"></label>
+          </div>
+        </td>
+        <td>
+          <%= link_to link.title, edit_admin_link_path(link) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_link_path(link), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_link_path(link), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td><%= link.url %></td>
+        <td class="text-center" style="font-size: 1.2em;"><%= link.new_window ? content_tag(:i, '', class: "fa fa-check-circle text-success") : content_tag(:i, '', class: "fa fa-times text-error") %></td>
+        <td><%= link.order %></td>
+        <td class="text-center" style="font-size: 1.2em;"><%= link.show_in_footer ? content_tag(:i, '', class: "fa fa-check-circle text-success") : content_tag(:i, '', class: "fa fa-times text-error") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

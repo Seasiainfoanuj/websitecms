@@ -1,0 +1,47 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:1%" >
+        <div class="checkbox check-default">
+          <input id="checkbox" type="checkbox" value="1" class="checkall">
+          <label for="checkbox"></label>
+        </div>
+      </th>
+      <th>Image</th>
+      <th width="30%">Title</th>
+      <th>Visibility</th>
+      <th>Price</th>
+      <th>Special Price</th>
+      <th class="text-center">Sold</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td class="v-align-middle">
+          <div class="checkbox check-default">
+            <input id="checkbox<%= product.id %>" class="row-checkbox" data-id="<%= product.id %>" type="checkbox" value="1">
+            <label for="checkbox<%= product.id %>"></label>
+          </div>
+        </td>
+        <td><%= image_tag product.featured_image_url(:thumb), width: 100 if product.featured_image_url.present? %></td>
+        <td>
+          <%= link_to product.title, edit_admin_product_path(product) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_product_path(product), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+              <%= link_to 'Preview', product_path(category_slug: product.categories.first.slug, product_slug: product.slug), class: 'btn btn-primary btn-mini' if product.categories.first %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= content_tag :span, product.visibility.humanize, class: "label label-inverse" if product.visibility == "private" %>
+        </td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(product.special_price) %></td>
+        <td class="text-center" style="font-size: 1.2em;"><%= product.sold ? content_tag(:i, '', class: "fa fa-check-circle text-success") : "" %></td>
+    <% end %>
+  </tbody>
+</table>

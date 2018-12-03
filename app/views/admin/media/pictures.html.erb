@@ -1,0 +1,104 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa-picture-o"></i>
+        <h3>Picture <span class="semi-bold">Library</span></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Picture <span class="semi-bold">Library</span></h4>
+
+              <div class="bulk-options">
+                <%= form_tag admin_media_bulk_destroy_pictures_path, id: "bulk-destroy-form", class: "bulk-action-form" do %>
+                  <%= submit_tag "Remove Selected", name: nil, id: "bulk-destroy-btn", class: "btn btn-mini btn-danger" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="grid-body no-border">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width:1%" >
+                      <div class="checkbox check-default">
+                        <input id="checkbox" type="checkbox" value="1" class="checkall">
+                        <label for="checkbox"></label>
+                      </div>
+                    </th>
+                    <th width="1%"></th>
+                    <th width="40%">File</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Filesize</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% @pictures.each do |picture| %>
+                    <tr>
+                      <td class="v-align-middle">
+                        <div class="checkbox check-default">
+                          <input id="checkbox<%= picture.id %>" class="row-checkbox" data-id="<%= picture.id %>" type="checkbox" value="1">
+                          <label for="checkbox<%= picture.id %>"></label>
+                        </div>
+                      </td>
+                      <td>
+                        <%= image_tag picture.data_url(:thumb) %>
+                      </td>
+                      <td>
+                        <%= link_to picture.data_file_name, image_path(picture.data_url) %>
+                        <div class="hover-actions">
+                          <div>
+                            <%= link_to 'View', image_path(picture.data_url), class: 'btn btn-primary btn-mini' %>
+                            <%= link_to 'Delete Permanently', redactor_rails_picture_path(picture), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <%= picture.user.name if picture.user %>
+                      </td>
+                      <td><%= "#{time_ago_in_words(picture.updated_at)} ago" %></td>
+                      <td><span class="small muted">(<%= number_to_human_size(picture.data_file_size) %>)</span></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div><!-- /grid-body -->
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Upload <span class="semi-bold">Pictures</span> <span class="muted"><%= RedactorRails.image_file_types.join('| ') %></span></h4>
+            </div>
+
+            <div class="grid-body no-border">
+              <div class="row-fluid">
+                <%= form_for [:redactor_rails, RedactorRails.picture_model.new], html: {class: "dropzone no-margin", multipart: true} do %>
+                  <div class="fallback">
+                    <%= file_field_tag 'data', multiple: true %>
+                  </div>
+                <% end %>
+              </div>
+            </div><!-- /grid-body -->
+
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+
+    </div><!-- /content -->
+  </div><!-- /page-content -->
+
+</div><!-- /page-container -->
+

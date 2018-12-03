@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    errors:
+      models:
+        vehicle:
+          attributes:
+            brochure:
+              size_too_big: Brochure is too large. Maximum size is 10MB.

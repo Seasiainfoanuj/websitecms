@@ -1,0 +1,69 @@
+<%= form_for([:admin, @vehicle_filter]) do |f| %>
+  <%= render 'admin/shared/forms/errors', model: @vehicle_filter %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :title, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :title, class: "form-control slug-title" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :slug, "Permalink", class: "form-label" %>
+            <%= content_tag :span, "Slug used for url must be unique ".html_safe + link_to("(edit)", "#", class: "edit-slug-btn"), class: "help" %>
+            <div class="controls">
+              <%= f.text_field :slug, class: "form-control slug", readonly: true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :data_filter, class: "form-label" %>
+            <%= content_tag :span, "Search term used to filter results", class: "help" %>
+            <div class="controls">
+              <%= f.text_field :data_filter, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox">
+              <%= f.check_box :enabled, checked: true %>
+              <%= f.label :enabled %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :position, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :position, class: "form-control", style: "width: 100px;" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :parent_id, "Parent", class: "form-label" %>
+            <div class="controls">
+              <%= f.collection_select :parent_id, VehicleFilter.all, :id, :title, include_blank: true %>
+            </div>
+          </div>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-8 %>
+
+    <div class="col-md-4">
+      <div class="grid simple">
+        <div class="grid-body">
+          <% if @vehicle_filter.id %>
+            <%= submit_tag 'Update', class: "btn btn-danger btn-block" %>
+          <% else %>
+            <%= submit_tag 'Save', class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-4 %>
+  </div><%# /row %>
+
+<% end %><%# /form %>

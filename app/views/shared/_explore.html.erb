@@ -1,0 +1,14 @@
+<div id="explore">
+  <div class="container">
+    <% @vehicle.related_vehicles.in_groups_of(6, false) do |related_vehicle_group| %>
+      <div class="row">
+        <% related_vehicle_group.each do |related_vehicle| %>
+          <div class="explore-item col-sm-4 col-md-2">
+            <%= link_to image_tag(related_vehicle.featured_image_url(:thumb), class: "explore-thumb", width: "100%") +
+                        content_tag(:span, related_vehicle.title, class: "explore-item-link"), "/vehicles/#{related_vehicle.slug}" %>
+          </div>
+        <% end %>
+      </div><%# /row %>
+    <% end %>
+  </div><%# /container %>
+</div><%# /explore %>

@@ -1,0 +1,28 @@
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right"></div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<% if @gallery %>
+  <div id="feature-slider">
+    <div class="container">
+      <%= render 'shared/feature_slider' %>
+    </div><%# /container %>
+  </div><%# /feature-slider %>
+<% end %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <%= @page.content.html_safe %>
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>

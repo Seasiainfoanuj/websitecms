@@ -1,0 +1,64 @@
+<div class="enquiry-form-response"></div>
+<%= form_tag send_enquiry_path, method: 'get', remote: true, class: "enquiry-form" do %>
+  <%= hidden_field_tag :source_application, 'cms' %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :first_name, "First Name*" %>
+        <%= text_field_tag :first_name, nil, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= label_tag :last_name, "Last Name*" %>
+        <%= text_field_tag :last_name, nil, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= label_tag :email, "Email*" %>
+        <%= email_field_tag :email, nil, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :phone, "Phone*" %>
+        <%= text_field_tag :phone, nil, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :company, "Organisation" %>
+        <%= text_field_tag :company, nil, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :job_title, "Job Title" %>
+        <%= text_field_tag :job_title, nil, class: "form-control" %>
+      </div>
+
+      <div class="form-group" style="display: none;">
+        <%= label_tag :enquiry_type_id, "Enquiry Type*" %>
+        <%= select_tag :enquiry_type_id, nil, class: "enquiry_types_select form-control"  %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :details, "Enquiry Message" %>
+        <%= text_area_tag :details, nil, id: "enquiry-form-details", class: "form-control", rows: 10 %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :find_us, "How did you find us? *", class: "form-label find-us" %>
+        <%= select_tag :find_us, options_for_select(['Social media','Bus 4x4 websites','Referrals','Magazine ads','Online ads','Others'],{:prompt => 'Select Person'}), class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= check_box_tag "subscribe_to_newsletter", nil, false %>
+        <%= label_tag "subscribe_to_newsletter", 'Yes, please add me to the BUS 4x4 newsletter list.' %>
+      </div>
+
+      <%= button_tag "Submit", class: "submit-btn btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

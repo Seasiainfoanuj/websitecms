@@ -1,0 +1,35 @@
+<% content_for :title, @category ? @category.name : "Latest News" %>
+
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right"></div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-9 posts">
+          <% unless @posts.blank? %>
+            <% @posts.each do |post| %>
+              <div class="post">
+                <h1 class="post-title"><%= link_to(post.title, "/posts/#{post.slug}") %></h1>
+                <span class="meta-info">Posted on <%= format_date(post.published_on) %></span>
+                <%= truncate_html(post.content, :length => 300, :omission => content_tag(:br) + link_to(" Read More ...", "/posts/#{post.slug}"), word_boundary: false) %>
+              </div>
+            <% end %>
+          <% else %>
+            <p>No posts to display.</p>
+          <% end %>
+        </div>
+        <div class="col-md-3 aside">
+          <%= render "shared/widgets/post_categories_aside_widget" %>
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>

@@ -1,0 +1,9 @@
+<% if model.errors.any? %>
+  <div class="alert alert-block alert-error fade in">
+    <button type="button" class="close" data-dismiss="alert"></button>
+    <h4 class="alert-heading"><i class="icon-warning-sign"></i> <%= pluralize(model.errors.count, "error") %> prohibited this user from being saved:</h4>
+    <% model.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>

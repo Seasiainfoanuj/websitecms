@@ -1,0 +1,25 @@
+<div id="overlay"></div>
+
+<div id="page-footer">
+  <div class="container">
+    <% Link.where(show_in_footer: true).in_groups_of(24, false) do |link_groups| %>
+      <div class="row">
+        <% link_groups.in_groups_of(4, false) do |link_group| %>
+          <div class="col-xs-4 col-sm-4 col-md-2">
+            <ul class="footer-links">
+              <% link_group.each do |link| %>
+                <li>
+                  <% if link.new_window %>
+                    <%= link_to link.title, link.url, target: :blank %>
+                  <% else %>
+                    <%= link_to link.title, link.url if link %>
+                  <% end %>
+                </li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div><!-- .row -->
+    <% end %>
+  </div><!-- .container -->
+</div><!-- #page-footer -->

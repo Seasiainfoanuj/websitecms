@@ -1,0 +1,4 @@
+<div class="widget">
+  <h4>Categories</h4>
+  <%= nested_post_categories_widget_list PostCategory.all.arrange(:order => :created_at) %>
+</div>

@@ -1,0 +1,37 @@
+<% if @gallery.gallery_type == "video_gallery" %>
+
+  <div id="video-gallery" class="royalSlider videoGallery rsDefault">
+    <% @gallery.slides.each do |slide| %>
+      <a class="rsImg" data-rsVideo="<%= slide.embedded_url %>" href="<%= slide.image_url(:large) %>">
+        <div class="rsTmb">
+          <%= slide.thumb_text.html_safe %>
+        </div>
+      </a>
+    <% end %>
+  </div><%# /video-gallery %>
+
+<% elsif @gallery.gallery_type == "product_gallery" %>
+
+  <div id="product-gallery" class="royalSlider product-gallery rsDefault">
+    <% @gallery.slides.each do |slide| %>
+      <% if slide.slide_type == "image" %>
+        <a class="rsImg" data-rsTmb="<%= slide.image_url(:thumb) %>" href="<%= slide.image_url(:large) %>"></a>
+      <% elsif slide.slide_type == "youtube" || slide.slide_type == "vimeo" %>
+        <a class="rsImg" data-rsTmb="<%= slide.image_url(:thumb) %>" data-rsVideo="<%= slide.embedded_url %>" href="<%= slide.image_url(:large) %>"></a>
+      <% end %>
+    <% end %>
+  </div><!-- #product-gallery -->
+
+<% else %>
+
+  <div id="gallery" class="royalSlider gallery rsDefault">
+    <% @gallery.slides.each do |slide| %>
+      <% if slide.slide_type == "image" %>
+        <a class="rsImg" data-rsTmb="<%= slide.image_url(:thumb) %>" href="<%= slide.image_url(:large) %>"></a>
+      <% elsif slide.slide_type == "youtube" || slide.slide_type == "vimeo" %>
+        <a class="rsImg" data-rsTmb="<%= slide.image_url(:thumb) %>" data-rsVideo="<%= slide.embedded_url %>" href="<%= slide.image_url(:large) %>"></a>
+      <% end %>
+    <% end %>
+  </div><%# /gallery %>
+
+<% end %>

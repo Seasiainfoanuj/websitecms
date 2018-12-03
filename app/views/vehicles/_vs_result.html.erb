@@ -1,0 +1,56 @@
+<%= will_paginate @vehicles %>
+
+<table>
+  <tbody>
+    <% @vehicles.each do |vehicle| %>
+      <tr class="vs-result">
+        <td class="vs-result-thumb-column">
+          <%= link_to image_tag(vehicle.featured_image_url(:thumb)), vehicle_path(slug: vehicle.slug), class: "vs-result-thumb" if vehicle.featured_image_url.present?%>
+          <%= content_tag(:span, "Available for Hire / Lease", class: "label hire-info") if vehicle.for_hire %>
+        </td>
+
+        <td class="vs-result-details">
+          <% link_to content_tag(:i, "", class: "glyphicon glyphicon-search"), vehicle_path(slug: vehicle.slug), class: "vs-result-link" %>
+
+          <h4 class="vs-result-title">
+            <%= link_to vehicle.title, vehicle_path(slug: vehicle.slug) %>
+          </h4>
+
+          <table class="vs-result-info">
+            <tbody>
+              <% if vehicle.make.present? || vehicle.model.present? %>
+                <tr>
+                  <td><b>Make / Model:</b></td>
+                  <td><%= "#{vehicle.make} #{vehicle.model}" %></td>
+                </tr>
+              <% end %>
+
+              <% if vehicle.specification.present? %>
+                <tr>
+                  <td><b>Spec Options:</b></td>
+                  <td><%= vehicle.specification %></td>
+                </tr>
+              <% end %>
+
+              <% if vehicle.seating_capacity.present? %>
+                <tr>
+                  <td><b>Seating Capacity:</b></td>
+                  <td><%= vehicle.seating_capacity %></td>
+                </tr>
+              <% end %>
+
+              <% if vehicle.kit.present? %>
+                <tr>
+                  <td><b>4x4 Kit:</b></td>
+                  <td><%= vehicle.kit %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @vehicles %>

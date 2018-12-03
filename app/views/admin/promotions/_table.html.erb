@@ -1,0 +1,39 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th width="20%">Changed by</th>
+      <th width="10%">Status</th>
+      <th width="10%">Visibility</th>
+      <th width="15%">Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @promotions.each do |page| %>
+      <tr>
+        <td>
+          <%= link_to "#{page.title} #{'- <b>Draft</b>' if page.status == 'draft'}".html_safe, edit_admin_promotion_path(page) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_promotion_path(page), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Preview', "/#{page.page_name}", class: 'btn btn-primary btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td><%= page.changed_by.name if page.changed_by %></td>
+        <td><%= page.status.titleize %></td>
+        <td>
+          <%= content_tag :span, page.visibility.humanize, class: "label label-inverse" if page.visibility == "private" %>
+        </td>
+        <td>
+          <% if page.status == "published" && page.published_on.present? && page.published_on >= page.created_at && page.published_on >= page.updated_at %>
+            <%= page.published_on.strftime("%F") %>
+          <% else %>
+            <%= page.updated_at.strftime("%F") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

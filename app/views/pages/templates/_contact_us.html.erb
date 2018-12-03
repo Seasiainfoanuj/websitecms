@@ -1,0 +1,25 @@
+<%= render 'shared/vehicle_search' %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="map-canvas"></div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="content">
+          <h1 class="heading">Contact Us</h1>
+          <%= @page.content.html_safe %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="content">
+          <%= link_to('Complete a vehicle enquiry...', root_url, class: "btn btn-primary") %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

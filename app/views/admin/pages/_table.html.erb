@@ -1,0 +1,55 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:1%" >
+        <div class="checkbox check-default">
+          <input id="checkbox" type="checkbox" value="1" class="checkall">
+          <label for="checkbox"></label>
+        </div>
+      </th>
+      <th>Title</th>
+      <th width="15%">Author</th>
+      <th width="10%"></th>
+      <th width="10%">Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pages.each do |page| %>
+      <tr>
+        <td class="v-align-middle">
+          <div class="checkbox check-default">
+            <input id="checkbox<%= page.id %>" class="row-checkbox" data-id="<%= page.id %>" type="checkbox" value="1">
+            <label for="checkbox<%= page.id %>"></label>
+          </div>
+        </td>
+        <td>
+          <%= link_to "#{page.title} #{'- <b>Draft</b>' if page.status == 'draft'}".html_safe, edit_admin_page_path(page) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_page_path(page), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_page_path(page), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+              <%= link_to 'Preview', "/#{page.slug}", class: 'btn btn-primary btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td><%= page.author.name if page.author %></td>
+        <td>
+          <%= content_tag :span, page.visibility.humanize, class: "label label-inverse" if page.visibility == "private" %>
+        </td>
+        <td>
+          <% if page.status == "published" && page.published_on.present? && page.published_on >= page.created_at && page.published_on >= page.updated_at %>
+            <%= page.published_on.strftime("%F") %> <br>
+            Published
+          <% elsif page.updated_at > page.created_at  %>
+            <%= page.updated_at.strftime("%F") %> <br>
+            Last Updated
+          <% else %>
+            <%= page.updated_at.strftime("%F") %> <br>
+            Draft
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
