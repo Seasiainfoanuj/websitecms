@@ -62,7 +62,7 @@ gem 'slim-rails'
 gem 'redactor-rails'
 
 # Ancestory for categories and filters
-gem 'ancestry'
+gem 'ancestry', "~> 2.1"
 
 # truncate_html
 gem 'truncate_html'

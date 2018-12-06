@@ -39,8 +39,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
-    ancestry (3.0.5)
-      activerecord (>= 3.2.0)
+    ancestry (2.2.2)
+      activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
     asset_sync (2.5.0)
       activemodel (>= 4.1.0)
@@ -287,7 +287,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ancestry
+  ancestry (~> 2.1)
   asset_sync
   autoprefixer-rails
   bootstrap-datepicker-rails
