@@ -12,3 +12,16 @@ wheneverize_worker(){
     wheneverize
   fi
 }
+
+wheneverize_periodics(){
+  if [[ "${SERVER_ROLE}" == "periodics" ]] ; then
+    wheneverize
+  fi
+}
+
+wheneverize_web(){
+  if [[ "${SERVER_ROLE}" == "web" ]] ; then
+    wheneverize
+  fi
+}
+
