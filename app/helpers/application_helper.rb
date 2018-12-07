@@ -20,4 +20,7 @@ module ApplicationHelper
     content_tag(:iframe, nil, src: "https://www.youtube.com/embed/#{youtube_id}")
   end
 
+  def image_base_url(content)
+    content.gsub("\"/media", "\"#{ENV["RAILS_ASSET_HOST"]}/media")
+  end
 end
