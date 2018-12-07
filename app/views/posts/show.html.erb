@@ -25,7 +25,7 @@
       <div class="row">
         <div class="col-md-9">
 
-          <%= @post.content.html_safe %>
+          <%= image_base_url(@post.content).html_safe %>
         </div>
         <div class="col-md-3 aside">
           <%= render "shared/widgets/post_categories_aside_widget" %>
