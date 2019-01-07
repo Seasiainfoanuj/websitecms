@@ -26,3 +26,5 @@ public/uploads
 public/media
 /coverage
 metrics
+
+.env
