@@ -25,11 +25,11 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-gem 'bootstrap-datepicker-rails'
+gem 'jquery-rails', '~> 3.1'
+gem 'bootstrap-datepicker-rails', '~> 1.3.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.5.3'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -56,10 +56,10 @@ gem "mini_magick"
 gem 'devise'
 gem 'cancancan', '~> 1.9'
 
-gem 'slim-rails'
+gem 'slim-rails', '~> 3.0'
 
 # Redactor editor
-gem 'redactor-rails'
+gem 'redactor-rails', '~> 0.4.5'
 
 # Ancestory for categories and filters
 gem 'ancestry', "~> 2.1"
