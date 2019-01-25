@@ -21,6 +21,8 @@ module ApplicationHelper
   end
 
   def image_base_url(content)
-    content.gsub("\"/media", "\"#{ENV["RAILS_ASSET_HOST"]}/media")
+    # replace redundant links and also use full url
+    content.gsub(/(http)?s?:?(\/\/)?www.bus4x4.com.au\/media/, "#{ENV["RAILS_ASSET_HOST"]}/media")
+      .gsub("\"/media","\"#{ENV["RAILS_ASSET_HOST"]}/media")
   end
 end
