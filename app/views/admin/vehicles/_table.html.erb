@@ -1,0 +1,52 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:1%" >
+        <div class="checkbox check-default">
+          <input id="checkbox" type="checkbox" value="1" class="checkall">
+          <label for="checkbox"></label>
+        </div>
+      </th>
+      <th>Image</th>
+      <th width="30%">Title</th>
+      <th>Visibility</th>
+      <th>Transmission</th>
+      <th>Specification</th>
+      <th>Seating Capacity</th>
+      <th>4x4 kit</th>
+      <th class="text-center">For hire</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vehicles.each do |vehicle| %>
+      <tr>
+        <td class="v-align-middle">
+          <div class="checkbox check-default">
+            <input id="checkbox<%= vehicle.id %>" class="row-checkbox" data-id="<%= vehicle.id %>" type="checkbox" value="1">
+            <label for="checkbox<%= vehicle.id %>"></label>
+          </div>
+        </td>
+        <td><%= image_tag vehicle.featured_image_url(:thumb), width: 100 if vehicle.featured_image_url.present? %></td>
+        <td>
+          <%= link_to vehicle.title, edit_admin_vehicle_path(vehicle) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_vehicle_path(vehicle), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_vehicle_path(vehicle), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+              <%= link_to 'Preview', "/vehicles/#{vehicle.slug}", class: 'btn btn-primary btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td>
+          <%= content_tag :span, vehicle.visibility.humanize, class: "label label-inverse" if vehicle.visibility == "private" %>
+        </td>
+        <td><%= vehicle.transmission %></td>
+        <td><%= vehicle.specification %></td>
+        <td><%= vehicle.seating_capacity %></td>
+        <td><%= vehicle.kit %></td>
+        <td class="text-center" style="font-size: 1.2em;"><%= vehicle.for_hire ? content_tag(:i, '', class: "fa fa-check-circle text-success") : content_tag(:i, '', class: "fa fa-times text-error") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

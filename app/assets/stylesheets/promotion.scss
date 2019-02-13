@@ -1,0 +1,232 @@
+#global-header {
+  #landing-header {
+    height: 100%;
+    display: inline;
+    .logo {
+      margin-top: 20px;
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+
+    p.header-text {
+      font-size: 1.8em;
+      text-align: center;
+      display: block;
+      font-weight: 600;
+    }
+    .call {
+      text-align: right;
+      padding-right: 25px;
+      img {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  }
+}
+
+#global-header-sticky-wrapper {
+  height: 100%;
+}
+
+@media (max-width: 992px) {
+  #global-header {
+    #landing-header {
+      p.header-text {
+        font-size: 1.4em;
+      }
+      .call {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #global-header {
+    #landing-page {
+      margin-top: 75px;
+    }
+    #landing-header {
+      .logo {
+        a {
+          img {
+            width: 250px;
+          }
+        }
+      }
+      p.header-text {
+        font-size: 1.4em;
+      }
+      .call { 
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  } 
+}
+
+#landing-page {
+  display: block;
+  background-color: white;
+  margin: 0 auto;
+  width: 100%;
+
+  .media {
+    display: block;
+    margin-bottom: 25px;
+
+    .media-body {
+      padding-right: 10px;
+      .video {
+        background-color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    h1.product-heading {
+      background-color: #C2EEC2;
+      padding: 10px;
+      text-align: center;
+    }
+
+    section.enquiry {
+      display: inline;
+      padding: 20px;
+      margin-bottom: 20px;
+
+      h3 {
+        background-color: white;
+        color: #333;
+        padding: 15px 0;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .enquiry-body {
+        display: block;
+        margin-top: 10px;
+
+        form.promotion-enquiry-form {
+          background-color: white;
+          opacity: 1.0;
+          padding: 10px 20px;
+
+          .form-group {
+            margin-bottom: 5px;
+            input.form-control, textarea.form-control {
+              opacity: 1.0;
+              color: #333;
+            }
+          }
+          .form-control {
+
+          }
+          .form-group.subscription {
+            background-color: white;
+            padding: 5px 10px 5px 15px;
+            opacity: 1.0;
+            color: #444;
+          }
+          .form-group.message {
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+          button.btn {
+            background-color: #337ab7;
+            color: white;
+          }
+        }
+      }
+    }
+
+    section.vehicle-info {
+      margin-top: 20px;
+    }
+
+    section.feature-description, section.testimonials {
+      padding-left: 20px;
+      padding-right: 20px;
+      margin: 0;
+      background-color: white;
+      opacity: 0.9;
+
+      .content {
+        width: 100%;
+        display: block;
+        /*border: 1px solid red;*/
+        padding: 10px;
+        table {
+          width: 100%;
+          margin-top: 10px;
+          tbody {
+            tr {
+              td {
+                padding: 5px;
+                ul {
+                  padding-left: 14px;
+                  li {
+                    margin: 4px 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      img {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+#landing-page.coasters {
+  background: #444;
+}
+#landing-page.commuters {
+  background: #444;
+}
+#landing-page.motorhomes {
+  background: #444;
+}
+
+.promotion-form-response {
+  padding: 5px 5px 10px 25px;
+}
+.promotion-form-response.error {
+  color: red;
+  margin-bottom: 20px;
+  background: #FFDEDE;
+}
+.promotion-form-response.success {
+  color: green;
+  background-color: #E0FFE0;
+}
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+} 
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+}
+

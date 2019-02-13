@@ -1,0 +1,376 @@
+@media all and (-webkit-min-device-pixel-ratio: 1.5) {
+  #global-header #global-brand {
+    background-image: image-url('bus4x4-group-logo@2x.png') !important;
+  }
+}
+
+@media (max-width: 320px) {
+  #global-header #global-brand {
+    width: 180px !important;
+    height: 18px !important;
+    background-size: 180px 18px !important;
+  }
+
+  #global-header .gn-search-button {
+    width: 30px !important;
+  }
+
+  .global-search-form .submit-btn {
+    padding: 12px 0px !important;
+    font-size: 1em !important;
+  }
+}
+
+@media (max-width: 450px) {
+  #vs-results .vs-result {
+    padding: 20px !important;
+  }
+
+  #vs-results .vs-result .vs-result-thumb {
+    float: none !important;
+    margin: 0 !important;
+  }
+
+  #vs-results .vs-result .vs-result-link {
+    font-size: 1.8em !important;
+  }
+
+  #vs-results .label.hire-info {
+    margin: -50px 20px -50px !important;
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+  #enquiry-form #hire-tab .form-group.horizontal input.mobilisation {
+    width: 100%;
+  }
+}
+
+@media (max-width: 510px) {
+  #store-menu {
+    display: none !important;
+  }
+
+  #store-nav li {
+    width: 100% !important;
+    border-left: none !important;
+    border-bottom: 1px solid #eee !important;
+    text-align: left !important;
+  }
+
+  #store-nav li a {
+    padding: 10px !important;
+  }
+
+  #store-nav li a .glyphicon {
+    display: inline !important;
+    margin-right: 5px !important;
+    margin-bottom: 0 !important;
+    font-size: 18px !important;
+  }
+
+  #vs-results .vs-result > td {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 0 20px !important;
+  }
+
+  #vs-results .vs-result .vs-result-thumb-column,
+  #vs-results .vs-result .vs-result-thumb,
+  #vs-results .vs-result .vs-result-thumb img {
+    width: 100% !important;
+    border: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  #vs-results .vs-result {
+    padding: 10px;
+  }
+
+  #vs-results .vs-result .vs-result-thumb {
+    margin-bottom: 15px;
+  }
+
+  #vs-results .vs-result .vs-result-spec-list {
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  #page-header .page-title {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 765px) {
+  #store-catalog .aside {
+    padding-bottom: 60px !important;
+  }
+
+  #store-catalog .aside.hidden {
+    display: none !important;
+  }
+}
+
+@media (max-width: 850px) {
+
+  #global-header #global-nav {
+    display: block !important;
+    position: absolute !important;
+    top: 60px !important;
+    width: 100% !important;
+    margin: 0 -15px !important;
+    background: #fff !important;
+    border-top: 1px solid #e6e6e6 !important;
+    clear: both !important;
+  }
+
+  #global-header #global-nav.mobile-nav {
+    display: none !important;
+  }
+
+  #global-header #global-nav.mobile-nav.active {
+    display: block !important;
+  }
+
+  #global-header #global-nav .gn-tab {
+    display: block !important;
+  }
+
+  #global-header #global-nav .gn-tab a {
+    display: block !important;
+    line-height: 60px !important;
+    border-bottom: 1px solid #e6e6e6 !important;
+    border-right: none !important;
+    font-size: 21px !important;
+  }
+
+  #global-header .gn-search-button {
+    float: right;
+  }
+
+  #global-header .gn-search-button .gn-search-icon {
+    font-size: 21px !important;
+  }
+
+  #global-header #global-nav ul.dropdown li a {
+    background: #f1f1f1 !important;
+  }
+
+  #feature-slider .container,
+  #vehicle-info .container,
+  #product-info .container,
+  #page-footer .container,
+  #global-footer .container {
+    padding: 0 !important;
+  }
+
+  #feature-slider .row,
+  #vehicle-info .row,
+  #product-info .row,
+  #page-footer .row,
+  #global-footer .row {
+    margin: 0 !important;
+  }
+
+  #vehicle-info .content,
+  #product-info .content {
+    padding-bottom: 30px !important;
+  }
+
+  #vs-results {
+    padding: 20px !important;
+  }
+
+  #vehicle-search-form {
+    width: 100% !important;
+  }
+
+  .vs-close-btn {
+    display: none !important;
+  }
+
+  .info-tabs {
+    display: none !important;
+  }
+
+  #page-header.vehicle-page-header .page-title {
+    display: none !important;
+  }
+
+  #page-header.vehicle-page-header .page-header-links {
+    width: 100% !important;
+  }
+
+  #page-header.vehicle-page-header .enquire-link,
+  #page-header.vehicle-page-header .explore-link {
+    display: block !important;
+    width: 50% !important;
+    float: left !important;
+    text-align: center !important;
+  }
+
+  #page-header.vehicle-page-header .page-header-links a {
+    font-size: 16px !important;
+  }
+
+  .vehicle-title {
+    display: block !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #ccc !important;
+    text-align: center !important;
+  }
+
+  .vehicle-title h1 {
+    font-weight: 300 !important;
+    font-size: 18px !important;
+    line-height: 1.8;
+  }
+
+  .vehicle-title h1 b {
+    display: block
+  }
+
+  .info-box {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #ccc !important;
+  }
+
+  .info-box-title {
+    display: block !important;
+  }
+
+  .info-box-title h2 {
+    margin: 0 !important;
+    padding: 15px 15px !important;
+    font-weight: 300 !important;
+    font-size: 18px !important;
+    cursor: pointer !important;
+  }
+
+  .info-box-title .glyphicon {
+    font-size: 12px !important;
+    line-height: 22px !important;
+    color: #b3b3b3 !important;
+  }
+
+  .info-box-title.active h2 {
+    font-weight: 700 !important;
+  }
+
+  .info-box-title.active .glyphicon {
+    color: #4d4d4d !important;
+  }
+
+  .info-box-content {
+    display: none !important;
+    padding: 0 !important;
+  }
+
+  .info-box-content p {
+    margin-top: 0 !important;
+  }
+
+  .info-box-content.active {
+    display: block !important;
+    padding: 0 0 30px !important;
+  }
+
+}
+
+@media (max-width: 992px) {
+  #global-header .container {
+    width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+@media (min-width: 765px) {
+  .filter-link { display: none !important; }
+}
+
+@media (min-width: 850px) {
+  #global-header .global-nav-toggle {
+    display: none !important;
+  }
+
+  #global-header #global-nav ul.dropdown,
+  #global-header #global-nav ul.dropdown li ul.dropdown {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: none;
+    position: absolute !important;
+    z-index: 99 !important;
+    min-width: 180px !important;
+    white-space: nowrap !important;
+    background: #fff !important;
+    border: 1px solid #eee !important;
+  }
+
+  #global-header #global-nav ul.dropdown li ul.dropdown {
+    left: 100% !important;
+  }
+
+  #global-header #global-nav ul.dropdown li {
+    clear: both !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  #global-header #global-nav ul.dropdown li a {
+    width: 100% !important;
+    padding: 15px 20px !important;
+    line-height: 1 !important;
+    color: #888 !important;
+    text-align: left !important;
+    display: inline-block !important;
+    float: left !important;
+    clear: both !important;
+    position: relative !important;
+    border-bottom: 1px solid #eee !important;
+    border-right: none !important;
+    -o-transition: padding .2s linear;
+    -moz-transition: padding .2s linear;
+    -webkit-transition: padding .2s linear;
+    transition: padding .2s linear;
+  }
+
+  #global-header #global-nav ul.dropdown li:hover > a{
+    padding-left: 28px !important;
+    padding-right: 19px !important;
+    color: #333 !important;
+  }
+
+  #explore.sticky {
+    position: fixed !important;
+    top: 50px !important;
+  }
+}
+
+@media (min-width: 850px) {
+  #global-header #global-nav {
+    width: 60% !important;
+  }
+}
+
+@media (min-width: 992px) {
+  #global-header #global-nav {
+    width: 640px !important;
+  }
+
+  #global-header #global-nav .gn-tab a {
+    font-size: 17px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #global-header #global-nav {
+    width: 840px !important;
+  }
+  #enquiry-form #hire-tab .form-group.horizontal input.mobilisation {
+    width: 220px;
+  }
+}

@@ -1,0 +1,20 @@
+<tr>
+  <td class="v-align-middle">
+    <div class="checkbox check-default">
+      <input id="checkbox<%= vehicle_filter.id %>" class="row-checkbox" data-id="<%= vehicle_filter.id %>" type="checkbox" value="1">
+      <label for="checkbox<%= vehicle_filter.id %>"></label>
+    </div>
+  </td>
+  <td>
+    <%= "-"*vehicle_filter.depth %>
+    <%= link_to vehicle_filter.title, edit_admin_vehicle_filter_path(vehicle_filter) %>
+    <div class="hover-actions">
+      <div>
+        <%= link_to 'Edit', edit_admin_vehicle_filter_path(vehicle_filter), class: 'btn btn-warning btn-mini' %>
+        <%= link_to 'Delete', admin_vehicle_filter_path(vehicle_filter), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+      </div>
+    </div>
+  </td>
+  <td><%= vehicle_filter.slug %></td>
+  <td><%= vehicle_filter.data_filter %></td>
+</tr>

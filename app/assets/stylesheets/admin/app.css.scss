@@ -1,0 +1,21 @@
+// This is the admin manifest file that'll be compiled into admin.css, which will include all the imported files listed below.
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "admin/style";
+@import "admin/responsive";
+@import "admin/custom-icon-set";
+@import "admin/font-awesome";
+@import "admin/dropzone";
+
+@import "animate.min";
+@import "jquery.scrollbar";
+@import "pace-theme-flash";
+
+@import "royalslider";
+@import "rs-theme";
+
+@import "redactor";
+
+@import "messenger";

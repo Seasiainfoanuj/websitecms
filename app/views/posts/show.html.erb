@@ -1,0 +1,36 @@
+<% content_for :title, @post.title %>
+<% content_for :meta do %>
+  <% if @post.meta_description %>
+    <meta name="description" content="<%= @post.meta_description %>">
+  <% end %>
+  <% if @post.meta_keywords %>
+    <meta name="keywords" content="<%= @post.meta_keywords %>">
+  <% end %>
+<% end %>
+
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right">
+      <span class="meta">Posted on <%= format_date(@post.published_on) %></span>
+    </div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-9">
+
+          <%= image_base_url(@post.content).html_safe %>
+        </div>
+        <div class="col-md-3 aside">
+          <%= render "shared/widgets/post_categories_aside_widget" %>
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>

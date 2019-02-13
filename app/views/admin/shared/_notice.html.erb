@@ -1,0 +1,5 @@
+<% [:notice, :error, :alert, :success].each do |level| %>
+  <% unless flash[level].blank? %>
+    <%= content_tag :span, flash[level], class: "notification hidden" %>
+  <% end %>
+<% end %>

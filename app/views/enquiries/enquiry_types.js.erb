@@ -1,0 +1,4 @@
+<% if @enquiry_types %>
+  $(".enquiry_types_select").html("<%= escape_javascript(render("enquiry_type_options")) %>");
+  $(".enquiry_types_select").parent().show();
+<% end %>

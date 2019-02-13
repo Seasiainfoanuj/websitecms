@@ -1,0 +1,1 @@
+<li><%= link_to category.name, store_path(category_slug: category.slug), class: "#{'active' if category.slug == params[:category_slug]}" %></li>

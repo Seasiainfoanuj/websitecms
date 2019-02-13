@@ -1,0 +1,137 @@
+<% content_for :title, @category.name %>
+
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right">
+      <span class="contact-phone"><i class="glyphicon glyphicon-earphone"></i>1300 287 494</span>
+      <a class="filter-link" href="#"><i class="glyphicon glyphicon-filter"></i></a>
+    </div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="store-menu">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ul id="store-nav">
+          <li class="sn-spare-parts <%= "active" if @root_slug == "spare-parts" %>">
+            <%= link_to "Spare Parts", store_path(category_slug: "spare-parts") %>
+          </li>
+          <li class="sn-vehicles <%= "active" if @root_slug == "second-hand-vehicles" %>">
+            <%= link_to "Second Hand Vehicles", store_path(category_slug: "second-hand-vehicles") %>
+          </li>
+          <li class="sn-accessories <%= "active" if @root_slug == "accessories" %>">
+            <%= link_to "Accessories", store_path(category_slug: "accessories") %>
+          </li>
+          <li class="sn-merchandise <%= "active" if @root_slug == "merchandise" %>">
+            <%= link_to "Mechandise", store_path(category_slug: "merchandise") %>
+          </li>
+          <div class="clr"></div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="store-catalog">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 aside">
+        <%= form_tag "/shop/#{@category.slug}", :method => 'get', :id => "store-search-form" do %>
+          <h3><b>Search</b> / Filter</h3>
+          <div class="store-search">
+            <%= text_field_tag :search, params[:search], placeholder: "Enter search terms to search results...", autocomplete: "off", autocorrect: "off", autocapitalize: "off" %>
+          </div>
+
+          <br>
+
+          <% @attributes.each do |attribute| %>
+            <%= select_tag attribute.downcase, options_for_select(ProductAttribute.where(name: attribute).pluck(:value).uniq, params["#{attribute.downcase}"]), prompt: attribute %>
+          <% end %>
+
+          <br>
+
+          <h3>Store Categories</h3>
+          <div class="store-category-list">
+            <%= nested_product_categories_links ProductCategory.all.arrange(:order => :created_at) %>
+          </div>
+
+          <%= submit_tag "Search", :name => nil %>
+        <% end %>
+      </div>
+
+      <div class="col-sm-9 content">
+        <div class="store-results-header">
+          <div class="results-info pull-left">
+            <%= page_entries_info @products, :model => 'Product' %>
+            <%= "filtered by " + @search_output.join(", ") if @search_output.present? %>
+          </div>
+
+          <div class="results-view-buttons pull-right">
+            <i id="grid-view-btn" class="glyphicon glyphicon-th-large"></i>
+            <i id="list-view-btn" class="glyphicon glyphicon-th-list selected"></i>
+          </div>
+
+          <div class="clr"></div>
+        </div>
+
+        <div class="search-results list">
+
+          <div class="clr">
+            <%= will_paginate @products %>
+          </div>
+
+          <% @products.each do |product| %>
+            <div class="search-result">
+              <%= link_to(image_tag(product.featured_image_url(:thumb), class: "search-result-thumb"), "/shop/#{@category.slug}/#{product.slug}") if product.featured_image_url.present? %>
+
+              <div class="search-result-info">
+                <div class="search-result-links">
+                  <div class="enquire-tag">
+                    <span class="status"><%= product.sold ? "SOLD" : "For Sale" %></span><%= link_to "Enquire Today", "#", class: "enquire-link", data: {meta: product.title} %>
+                  </div>
+
+                  <div class="search-result-price <%= "special" if product.special_price.present? && product.special_price_cents > 0 %>">
+                    <span class="price"><%= number_to_currency(product.price) %></span>
+                    <span class="special-price"><%= number_to_currency(product.special_price) if product.special_price.present? && product.special_price_cents > 0 %></span>
+                    <span class="tax-msg">price includes GST</span>
+                  </div>
+                </div>
+
+                <h4 class="search-result-title"><%= link_to product.title, "/shop/#{@category.slug}/#{product.slug}" %></h4>
+
+
+                <div class="search-result-spec-lists">
+                  <% product.custom_attributes.limit(4).in_groups_of(2).each do |attributes| %>
+                    <ul class="search-result-spec-list">
+                      <% attributes.each do |attribute| %>
+                        <% if attribute %>
+                          <li><b><%= attribute.name %>:</b> <%= attribute.value %></li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+
+                <div class="clr"></div>
+              </div>
+
+              <div class="clr"></div>
+            </div><!-- .search-result -->
+          <% end %>
+
+          <div class="clr"></div>
+        </div><!-- .search-results.list -->
+
+        <div class="store-results-footer">
+          <%= will_paginate @products %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/enquire_model' %>

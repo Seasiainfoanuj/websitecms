@@ -1,0 +1,11 @@
+<% content_for :title, @page.title %>
+<% content_for :meta do %>
+  <% if @page.meta_description %>
+    <meta name="description" content="<%= @page.meta_description %>">
+  <% end %>
+  <% if @page.meta_keywords %>
+    <meta name="keywords" content="<%= @page.meta_keywords %>">
+  <% end %>
+<% end %>
+
+<%= render "pages/templates/#{@page.template}" %>

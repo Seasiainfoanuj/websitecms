@@ -1,0 +1,106 @@
+<% content_for :title, @promotion.title %>
+
+<%= render "shared/landing_header" %>
+
+<% classname = "container #{@promotion.page_name}" %>
+<div id="landing-page" class= "<%= classname %>">
+  <div class="media">
+    <div class="media-body">
+      <div class="row">
+        <section class="enquiry">
+          <div class="enquiry-body">
+            <div class="col-sm-6">
+              <h3>
+                Yes, send me more information about your 4x4 Toyota Coaster
+              </h3>
+              <div class="promotion-form-response"></div>
+
+              <%= form_tag send_enquiry_path, method: 'get', remote: true, class: "promotion-enquiry-form" do %>
+                <%= hidden_field_tag :source_application, 'cms' %>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <%= label_tag nil, "Your details" %>
+                    </div>
+                  </div>
+                </div>
+                      
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= text_field_tag :first_name, nil, class: "form-control", placeholder: '*First name' %>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <%= text_field_tag :last_name, nil, class: "form-control", placeholder: '*Last name' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <%= text_field_tag :phone, nil, class: "form-control", placeholder: '*Phone' %>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <%= text_field_tag :company, nil, class: "form-control", placeholder: 'Company name' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <%= email_field_tag :email, nil, class: "form-control", placeholder: '*Email' %>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group message">
+                    <%= label_tag :details, "Enquiry Message" %>
+                    <%= text_area_tag :details, nil, id: "enquiry-form-details", class: "form-control", rows: 4 %>
+                  </div>
+                </div>
+                <div class="row">  
+                  <div class="form-group subscription">
+                    <%= check_box_tag "subscribe_to_newsletter", nil, true %>
+                    <%= label_tag "subscribe_to_newsletter", 'Yes, please add me to the BUS 4x4 newsletter list.' %>
+                    <%= button_tag "Submit", class: "submit-btn btn" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-sm-6 video">
+              <div class="embed-container">
+                <%= embed(@promotion.feature_video_url) %>
+              </div>
+            </div>
+          </div>  
+        </section>
+      </div>  
+      <div class="row">
+        <section class="vehicle-info">
+          <div class="col-md-6">
+            <section class="feature-description">
+              <div class="content">
+                <%= @promotion.feature_description.html_safe %>
+              </div>
+            </section>
+          </div>
+          <div class="col-md-6">
+            <section class="testimonials">
+              <div class="content">
+                <%= @promotion.testimonials.html_safe %>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>  
+    </div>
+  </div>
+</div> 

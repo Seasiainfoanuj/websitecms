@@ -1,0 +1,20 @@
+<tr>
+  <td class="v-align-middle">
+    <div class="checkbox check-default">
+      <input id="checkbox<%= product_category.id %>" class="row-checkbox" data-id="<%= product_category.id %>" type="checkbox" value="1">
+      <label for="checkbox<%= product_category.id %>"></label>
+    </div>
+  </td>
+  <td>
+    <%= "-"*product_category.depth %>
+    <%= link_to product_category.name, edit_admin_product_category_path(product_category) %>
+    <div class="hover-actions">
+      <div>
+        <%= link_to 'Edit', edit_admin_product_category_path(product_category), class: 'btn btn-warning btn-mini' %>
+        <%= link_to 'Delete', admin_product_category_path(product_category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+      </div>
+    </div>
+  </td>
+  <td><%= product_category.slug %></td>
+  <td><%= product_category.parent.name if product_category.parent %></td>
+</tr>

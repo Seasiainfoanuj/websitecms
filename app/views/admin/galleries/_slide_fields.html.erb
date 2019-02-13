@@ -1,0 +1,54 @@
+<div class="col-md-4">
+  <div class="widget-item" style="margin-bottom: 20px;">
+    <% if f.object.image_url %>
+      <div class="tiles green overflow-hidden full-height" style="max-height:280px">
+        <%= image_tag f.object.image_url(:large), class: "lazy hover-effect-img", style: "width: 100%;" if f.object.image_url.present? %>
+      </div>
+    <% end %>
+
+    <div class="tiles white">
+      <div class="tiles-body">
+        <div class="form-group">
+          <%= f.label :image, class: "form-label" %>
+          <div class="controls">
+            <%= f.file_field :image, style: "border:none" %>
+            <%= f.hidden_field :image_cache %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :slide_type, "Type", class: "form-label" %>
+          <div class="controls">
+            <%= f.collection_select :slide_type, Slide::TYPES, :to_s, Proc.new {|v| v.to_s.humanize} %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :embedded_url, class: "form-label" %>
+          <div class="controls">
+            <%= f.text_field :embedded_url, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :thumb_text, class: "form-label" %>
+          <div class="controls">
+            <%= f.text_area :thumb_text, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :order, class: "form-label" %>
+          <div class="controls">
+            <%= f.text_field :order, class: "form-control", style: "width: 100px;" %>
+          </div>
+        </div>
+
+        <div class="checkbox check-danger">
+          <%= f.check_box :_destroy %>
+          <%= f.label :_destroy, "Remove" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

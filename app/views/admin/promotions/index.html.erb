@@ -1,0 +1,30 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa-code"></i>
+        <h3>Web <span class="semi-bold">Promotion Pages</span></h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="grid simple">
+            <div class="grid-title no-border">
+              <h4>Promotion Pages</h4>
+            </div>
+
+            <div class="grid-body no-border">
+              <%= render "table" %>
+              <%= render 'admin/shared/pagination', model: @promotions %>
+            </div><!-- /grid-body -->
+          </div><!-- /grid -->
+        </div><!-- /col-md-12 -->
+      </div><!-- /row -->
+    </div><!-- /content -->
+  </div><!-- /page-content -->
+
+</div><!-- /page-container -->

@@ -1,0 +1,85 @@
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= yield :title %></h1>
+    <div class="page-header-links pull-right"></div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<% if @gallery %>
+  <div id="feature-slider">
+    <div class="container">
+      <%= render 'shared/feature_slider' %>
+    </div><%# /container %>
+  </div><%# /feature-slider %>
+<% end %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <%= image_base_url(@page.content).html_safe %>
+
+          <div class="vs-results">
+            <div class="vs-results-items">
+              <table class="table">
+                <tbody>
+                  <% Vehicle.where(for_hire: true).where.not(visibility: :private).each do |vehicle| %>
+                    <tr class="vs-result">
+                      <td class="vs-result-thumb-column">
+                        <%= link_to image_tag(vehicle.featured_image_url(:thumb)), vehicle_path(slug: vehicle.slug), class: "vs-result-thumb" if vehicle.featured_image_url.present?%>
+                        <%= content_tag(:span, "Available for Hire / Lease", class: "label hire-info") if vehicle.for_hire %>
+                      </td>
+
+                      <td class="vs-result-details">
+                        <%= link_to content_tag(:i, "", class: "glyphicon glyphicon-search"), vehicle_path(slug: vehicle.slug), class: "vs-result-link" %>
+
+                        <h4 class="vs-result-title">
+                          <%= link_to vehicle.title, vehicle_path(slug: vehicle.slug) %>
+                        </h4>
+
+                        <table class="vs-result-info">
+                          <tbody>
+                            <% if vehicle.make.present? || vehicle.model.present? %>
+                              <tr>
+                                <td><b>Make / Model:</b></td>
+                                <td><%= "#{vehicle.make} #{vehicle.model}" %></td>
+                              </tr>
+                            <% end %>
+
+                            <% if vehicle.specification.present? %>
+                              <tr>
+                                <td><b>Spec Options:</b></td>
+                                <td><%= vehicle.specification %></td>
+                              </tr>
+                            <% end %>
+
+                            <% if vehicle.seating_capacity.present? %>
+                              <tr>
+                                <td><b>Seating Capacity:</b></td>
+                                <td><%= vehicle.seating_capacity %></td>
+                              </tr>
+                            <% end %>
+
+                            <% if vehicle.kit.present? %>
+                              <tr>
+                                <td><b>4x4 Kit:</b></td>
+                                <td><%= vehicle.kit %></td>
+                              </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><%# /content %>
+  </div><%# /container %>
+</div><%# /page-content %>

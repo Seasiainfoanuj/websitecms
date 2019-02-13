@@ -1,0 +1,62 @@
+<%= render 'shared/vehicle_search' %>
+
+<% if @gallery %>
+  <div id="feature-slider">
+    <div class="container">
+      <%= render 'shared/feature_slider' %>
+    </div><%# /container %>
+  </div><%# /feature-slider %>
+<% end %>
+
+<div id="page-content">
+  <div class="container">
+    <div class="row intro">
+      <div class="col-sm-6 col-md-7">
+        <%= image_base_url(@page.content).html_safe %>
+      </div>
+      <div class="col-sm-6 col-md-5">
+        <%= render 'shared/contact_form' %>
+      </div>
+    </div>
+
+    <div class="row widgets">
+      <div class="col-md-6">
+        <div id="news-widget" class="widget event-widget">
+          <h2><b>News</b> Feed <div class="pull-right"><%= link_to 'View All', posts_path(category: 'news'), class: 'link-to-all' %></div></h2>
+          <div class="content">
+            <% @news_category = PostCategory.find_by_slug('news') %>
+            <% if @news_category && @news_category.posts.present? %>
+              <% @news_category.posts.where.not(visibility: 'private', status: 'draft').order('published_on DESC').limit(3).each do |post| %>
+                <div class="event">
+                  <h3 class="event-title"><%= link_to post.title, "/posts/#{post.slug}" %></h3>
+                  <p class="event-description"><%= truncate_html(image_base_url(post.content), :length => 200, word_boundary: false) %></p>
+                  <p><span class="event-meta">Posted <%= post.published_on.strftime("%F") %></span> <%= link_to("Read More", "/posts/#{post.slug}", class: "more-link") %></p>
+                </div><!-- .event -->
+              <% end %>
+            <% else %>
+              <p>No news posts to display</p>
+            <% end %>
+          </div><!-- .content -->
+        </div><!-- #news-widget -->
+      </div><!-- .col-md-6 -->
+
+      <div class="col-md-6">
+        <div id="events-widget" class="widget event-widget">
+          <h2><b>Upcoming</b> Events <div class="pull-right"><%= link_to 'View All', posts_path(category: 'upcoming-events'), class: 'link-to-all' %></div></h2>
+          <div class="content">
+            <% @event_category = PostCategory.find_by_slug('upcoming-events') %>
+            <% if @event_category && @event_category.posts.present? %>
+              <% @event_category.posts.where.not(visibility: 'private', status: 'draft').limit(3).each do |post| %>
+                <div class="event">
+                  <h3 class="event-title"><%= link_to post.title, "/posts/#{post.slug}" %></h3>
+                  <p class="event-description"><%= truncate_html(image_base_url(post.content), :length => 200, :omission => " " + link_to("Read More", "/posts/#{post.slug}"), word_boundary: false) %></p>
+                </div><!-- .event -->
+              <% end %>
+            <% else %>
+              <p>No Upcoming Events.</p>
+            <% end %>
+          </div><!-- .content -->
+        </div><!-- #news-widget -->
+      </div><!-- .col-md-6 -->
+  </div><%# /container %>
+</div><%# /page-content %>

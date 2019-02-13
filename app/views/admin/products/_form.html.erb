@@ -1,0 +1,201 @@
+<%= form_for([:admin, @product]) do |f| %>
+  <%= render 'admin/shared/forms/errors', model: @product %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :title, "Product Title", class: "form-label" %>
+            <div class="controls">
+              <%= f.text_field :title, class: "form-control slug-title" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :slug, "Permalink", class: "form-label" %>
+            <%= content_tag :span, "Slug used for url must be unique ".html_safe + link_to("(edit)", "#", class: "edit-slug-btn"), class: "help" %>
+            <div class="controls">
+              <%= f.text_field :slug, class: "form-control slug", readonly: true %>
+            </div>
+          </div>
+
+          <div class="col-md-6" style="padding-left: 0;">
+            <div class="form-group">
+              <%= f.label :price, "Display Price", class: "form-label" %>
+              <%= content_tag :span, "Including GST", class: "help" %>
+              <div class="controls">
+                <%= f.text_field :price, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6" style="padding-right: 0;">
+            <div class="form-group">
+              <%= f.label :special_price, "Special Price", class: "form-label" %>
+              <%= content_tag :span, "Including GST", class: "help" %>
+              <div class="controls">
+                <%= f.text_field :special_price, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :quick_overview, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_area :quick_overview, class: "form-control editor" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :overview, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_area :overview, class: "form-control editor" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :specifications, class: "form-label" %>
+            <div class="controls">
+              <%= f.text_area :specifications, class: "form-control editor" %>
+            </div>
+          </div>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+      <div class="grid simple">
+        <div class="grid-title no-border">
+          <h4>Meta Information</h4>
+          <div class="tools">
+            <a href="javascript:;" class="collapse"></a>
+          </div>
+        </div>
+        <div class="grid-body no-border">
+
+          <div class="form-group">
+            <%= f.label :meta_keywords, class: "form-label" %>
+            <%= content_tag :span, "Seperate by comma i.e. sample,keywords", class: "help" %>
+            <div class="controls">
+              <%= f.text_field :meta_keywords, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :meta_description, class: "form-label" %>
+            <%= content_tag :span, "155 Characters or less", class: "help" %>
+            <div class="controls">
+              <%= f.text_area :meta_description, class: "form-control" %>
+            </div>
+          </div>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-8 %>
+
+    <div class="col-md-4">
+      <div class="grid simple">
+        <div class="grid-body">
+
+          <div class="form-group">
+            <%= f.label :visibility, class: "form-label" %>
+            <div class="controls">
+              <%= f.collection_select :visibility, Product::VISIBILITIES, :to_s, Proc.new {|v| v.to_s.humanize} %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="controls">
+              <div class="checkbox check-danger">
+                <%= f.check_box :sold %>
+                <%= f.label :sold, "Sold" %>
+              </div>
+            </div>
+          </div>
+
+          <% if @product.id %>
+            <%= submit_tag 'Update', class: "btn btn-danger btn-block" %>
+          <% else %>
+            <%= submit_tag 'Save', class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+      <div class="grid simple">
+        <div class="grid-title no-border">
+          <h4>Categories</h4>
+          <div class="tools">
+            <a href="javascript:;" class="collapse"></a>
+          </div>
+        </div>
+        <div class="grid-body no-border">
+          <div class="form-group">
+            <div class="controls">
+              <%= nested_product_categories_select ProductCategory.arrange(:order => :created_at), @product %>
+            </div>
+          </div>
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+      <div class="grid simple">
+        <div class="grid-title no-border">
+          <h4>Custom Attributes</h4>
+          <div class="tools">
+            <a href="javascript:;" class="collapse"></a>
+          </div>
+        </div>
+        <div class="grid-body no-border">
+
+          <%= f.fields_for :custom_attributes do |builder| %>
+            <%= render 'custom_attribute_fields', f: builder %>
+          <% end %>
+
+          <%= link_to_add_fields "Add New Attribute", f, :custom_attributes %>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+      <div class="grid simple">
+        <div class="grid-body">
+          <div class="form-group">
+            <%= f.label :gallery_id, "Featured Gallery", class: "form-label" %>
+            <div class="controls">
+              <%= f.collection_select :gallery_id, Gallery.all, :id, :name, include_blank: "Optional" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <% if f.object.featured_image_url %>
+              <%= image_tag f.object.featured_image_url(:thumb) if f.object.featured_image_url.present? %>
+              <div class="checkbox check-danger">
+                <%= f.check_box :remove_featured_image %>
+                <%= f.label :remove_featured_image %>
+              </div>
+            <% else %>
+              <%= f.label :featured_image, class: "form-label" %>
+              <div class="controls">
+                <%= f.file_field :featured_image, style: "border:none" %>
+                <%= f.hidden_field :featured_image_cache %>
+              </div>
+            <% end %>
+          </div>
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+
+    </div><%# /col-md-4 %>
+
+  </div><%# /row %>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="grid simple">
+        <div class="grid-body">
+
+          <!-- related products -->
+
+        </div><%# /grid-body %>
+      </div><%# /grid %>
+    </div><%# /col-md-8 %>
+  </div><%# /row %>
+
+<% end %>

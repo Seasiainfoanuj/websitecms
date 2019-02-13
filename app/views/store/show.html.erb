@@ -1,0 +1,98 @@
+<% content_for :title, @product.title %>
+
+<div id="page-header">
+  <div class="container">
+    <h1 class="page-title"><%= link_to(@category.name, "/shop/#{@category.slug}") + " > " + @product.title %></h1>
+    <div class="page-header-links pull-right">
+      <span class="contact-phone"><i class="glyphicon glyphicon-earphone"></i>1300 287 494</span>
+    </div>
+  </div>
+</div><%# /page-header %>
+
+<%= render 'shared/vehicle_search' %>
+
+<div id="product-intro">
+  <div class="container">
+    <div class="row content">
+      <div class="col-md-12">
+        <div class="col-md-7 product-gallery-column">
+          <% if @gallery %>
+            <% @gallery.gallery_type = "product_gallery" #overide gallery type %>
+            <%= render 'shared/feature_slider' %>
+          <% elsif @product.featured_image.present? %>
+            <%= image_tag @product.featured_image_url(:large), width: "100%" %>
+          <% end %>
+        </div>
+        <div class="col-md-5 product-quick-overview" style="<%= 'padding: 20px;' unless @gallery %>">
+          <h1><%= @product.title %></h1>
+
+          <div class="pull-right">
+            <div class="enquire-tag">
+              <span class="status"><%= @product.sold ? "SOLD" : "For Sale" %></span><%= link_to "Enquire Today", "#", class: "enquire-link", data: {meta: @product.title} %>
+            </div>
+
+            <div class="price-info <%= "special" if @product.special_price.present? && @product.special_price_cents > 0 %>">
+              <span class="price"><%= number_to_currency(@product.price) %></span>
+              <span class="special-price"><%= number_to_currency(@product.special_price) if @product.special_price.present? && @product.special_price_cents > 0 %></span>
+              <span class="tax-msg">price includes GST</span>
+            </div>
+          </div>
+
+          <ul class="spec-list">
+            <% @product.custom_attributes.each do |attribute| %>
+              <li><b><%= attribute.name %>:</b> <%= attribute.value %></li>
+            <% end %>
+          </ul>
+
+          <div class="quick-overview">
+            <h4>Quick Overview</h4>
+            <%= @product.quick_overview.html_safe if @product.quick_overview.present? %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="product-info">
+  <div class="container">
+    <div class="row content">
+      <div class="col-md-12">
+        <ul class="info-tabs">
+          <li class="info-tab active"><a href="#overview">Overview</a></li>
+          <li class="info-tab"><a href="#specs">Specifications</a></li>
+        </ul>
+
+        <div id="overview" class="info-box active">
+          <div class="info-box-title">
+            <h2>Overview <i class="glyphicon glyphicon-plus pull-right"></i></h2>
+          </div>
+          <div class="info-box-content">
+            <div class="row">
+              <div class="col-md-8">
+                <%= @product.overview.html_safe if @product.overview.present? %>
+              </div>
+            </div>
+          </div>
+        </div><!-- #overview -->
+
+        <div id="specs" class="info-box">
+          <div class="info-box-title">
+            <h2>Specifications <i class="glyphicon glyphicon-plus pull-right"></i></h2>
+          </div>
+          <div class="info-box-content">
+            <div class="row">
+              <div class="col-md-12">
+                <%= @product.specifications.html_safe if @product.specifications.present? %>
+              </div>
+            </div>
+          </div>
+        </div><!-- #specs -->
+
+      </div><!-- .col-md-12 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- #product-info -->
+
+<%= render 'shared/enquire_model' %>

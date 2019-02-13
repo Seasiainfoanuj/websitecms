@@ -1,0 +1,40 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:1%" >
+        <div class="checkbox check-default">
+          <input id="checkbox" type="checkbox" value="1" class="checkall">
+          <label for="checkbox"></label>
+        </div>
+      </th>
+      <th>Name</th>
+      <th width="15%">Type</th>
+      <th width="15%">Shortcode</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @galleries.each do |gallery| %>
+      <tr>
+        <td class="v-align-middle">
+          <div class="checkbox check-default">
+            <input id="checkbox<%= gallery.id %>" class="row-checkbox" data-id="<%= gallery.id %>" type="checkbox" value="1">
+            <label for="checkbox<%= gallery.id %>"></label>
+          </div>
+        </td>
+        <td>
+          <%= link_to gallery.name, edit_admin_gallery_path(gallery) %>
+          <div class="hover-actions">
+            <div>
+              <%= link_to 'Edit', edit_admin_gallery_path(gallery), class: 'btn btn-warning btn-mini' %>
+              <%= link_to 'Delete', admin_gallery_path(gallery), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-mini' %>
+              <%= link_to 'Preview', admin_gallery_path(gallery), class: 'btn btn-primary btn-mini' %>
+            </div>
+          </div>
+        </td>
+        <td><%= gallery.gallery_type.humanize %></td>
+        <td>[<%= gallery.shortcode %>]</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

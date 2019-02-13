@@ -1,0 +1,77 @@
+<div id="vehicle-search">
+  <div class="container">
+    <div class="row">
+      <div id="vs-filters" class="col-md-4">
+
+        <div class="vs-filter-tabs">
+          <a href="#" id="vs-filter-tab-1" data-value="false" class="vs-filter-tab active">For Sale</a>
+          <a href="#" id="vs-filter-tab-2" data-value="true" class="vs-filter-tab">Hire / Lease</a>
+          <div class="clr"></div>
+        </div>
+
+        <div class="vs-filter-list-tabs">
+          <a href="#vs-filter-list-1" id="vs-filter-list-tab-1" class="vs-filter-list-tab active">Make / Model</a>
+          <a href="#vs-filter-list-2" id="vs-filter-list-tab-2" class="vs-filter-list-tab">Specification</a>
+          <a href="#vs-filter-list-3" id="vs-filter-list-tab-3" class="vs-filter-list-tab">Seating</a>
+          <div class="clr"></div>
+        </div>
+
+        <div id="vs-filter-list-1" class="vs-filter-list active">
+          <ul><%= nested_vehicle_filter_links VehicleFilter.all.arrange(:order => :position) %></ul>
+        </div>
+
+        <div id="vs-filter-list-2" class="vs-filter-list">
+          <ul>
+            <% specs = [] %>
+            <% Vehicle.pluck(:specification).each do |specification| %>
+              <% if specification.present? %>
+                <% specification.split(',').uniq.each do |spec| %>
+                  <% specs << spec.strip %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+            <% specs.uniq.each do |spec| %>
+              <li><a href="#" data-filter="<%= spec.downcase %>"><%= spec %></a></li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div id="vs-filter-list-3" class="vs-filter-list">
+          <ul>
+            <% Vehicle.pluck(:seating_capacity).uniq.compact.sort.each do |seating_capacity| %>
+              <% if seating_capacity.present? %>
+                <li><a href="#" data-filter="<%= seating_capacity.downcase %>"><%= seating_capacity %></a></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
+
+      <div id="vs-results"  class="col-md-8 vs-results">
+        <div class="vs-results-header">
+
+          <%= form_tag vehicle_search_path, :method => 'get', :id => "vehicle-search-form" do %>
+            <p>
+              <%= hidden_field_tag :for_hire, false, id: "vs-for-hire-filter" %>
+              <%= text_field_tag :vehicle_search, params[:vehicle_search], id: "vs-search", class: "vs-search-input", placeholder: "Search our range...", autocomplete: "off", autocorrect: "off", autocapitalize: "off" %>
+              <%= button_tag(type: "submit", class: "vs-search-submit") do %>
+                  <i class="glyphicon glyphicon-search"></i>
+              <% end %>
+            </p>
+            <%= image_tag "loading.gif", id: "vs-preloader" %>
+          <% end %>
+          <a class="vs-close-btn pull-right" href="#">Close</a>
+
+          <div class="clr"></div>
+        </div>
+
+        <div class="vs-results-items">
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

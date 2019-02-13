@@ -1,0 +1,215 @@
+/*#global-header-sticky-wrapper.sticky-wrapper {
+  height: 75px;
+}*/
+
+#vehicle-info {
+  .vehicle-brochure {
+    margin-top: 20px;
+    img {
+      width: 200px;
+    }
+  }
+  #specs.info-box {
+    table.outer {
+      td {
+        padding: 0;
+      }
+    }
+
+    table.inner {
+      width: 100%;
+      margin: 0;
+      tr { 
+        td {
+          padding: 5px 10px;
+        }
+        td:first-of-type {
+          width: 40%;
+          border-left: none;
+        }
+        td:last-of-type {
+          width: 60%;
+          border-right: none;
+        }
+      }
+      tr:first-of-type td {
+        border-top: none;
+      }
+      tr:last-of-type td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+section.contact-us {
+  padding: 10px 15px;
+  form {
+    margin-top: 5px;
+    border: 2px solid #C7C7C7;
+    border-radius: 15px;
+    padding: 12px;
+    display: inline-block;
+    width: 100%;
+
+    h3 {
+      color: #D80B14;
+      font-size: 22px;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 9px;
+      input.form-control, select.form-control {
+        font-size: 0.95em;
+        color: #A6A18F;
+      }
+    }
+    label {
+      font-weight: normal;
+    }
+    .form-group.subscribe {
+      label {
+        display: inline;
+      }
+    }
+    input[type="checkbox"] {
+      margin-right: 8px; 
+    }
+    .actions {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      button.submit-btn {
+        background-color: #D82830;
+        color: #F8F8F8;
+        margin: 0 auto;
+        text-align: center;
+        display: block;
+        padding: 5px 8px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .sub-header p {
+    font-size: 12px;
+    color: #8e8e8e;
+    text-align: center;
+  }
+}
+form.enquiry-form {
+  input[type="checkbox"] {
+    margin-right: 10px;
+  }
+}
+.enquiry-form-response.success {
+  color: #008000;
+  padding: 10px;
+  margin-top: 20px;
+  border: 1px solid #006400;
+  border-radius: 10px;
+  background-color: #D6EED6;
+}
+
+#enquiry-form {
+  background-color: #FDFDFD;
+  .nav-tabs > li.active > a { border: none;}
+  .tab-content { border: none;}
+  input.form-control {
+    background-color: #FFFFFF;
+  }
+  .form-group {
+    input.form-control, select.form-control, textarea.form-control {
+      color: #4A4A4A;
+    }  
+  }
+/*  .tab-content {
+    border: 1px solid #DDD;
+  }*/
+  .nav-tabs {
+    border-bottom: none;
+  }
+  .form-group {
+    input.name {
+      width: 50%;
+      display: inline-block;
+    }
+    input.phone {
+      width: 35%;
+      display: inline-block;
+    }
+    input.company {
+      width: 65%;
+      display: inline-block;
+    }
+    label.find-us {
+      width: 40%;
+      display: inline-block;
+      color: #8e8e8e;
+    }
+    select.find-us-drop{
+      width: 60%;
+      display: inline-block;
+    }
+  }
+  ul#tabs {
+    li>a {
+      color: #8C8C8C;
+    }
+    li.active {
+      >a {
+        background-color: #F0F0F0;
+        color: #FF0000;
+      }
+    }
+  }
+  #sales-tab {
+    padding: 10px 8px;
+    background-color: #F0F0F0;
+    .form-group {
+      input.form-control, select.form-control, textarea.form-control {
+        background-color: #FDFDFD;
+      }  
+    }
+  }
+  #hire-tab {
+    padding: 10px 8px;
+    background-color: #F0F0F0;
+    .form-group {
+      input.form-control, select.form-control, textarea.form-control {
+        background-color: #FFFFFF;
+      }  
+    }
+    .form-group.horizontal {
+      label {
+        color: #4A4A4A;
+        padding-top: 5px;
+        width: 130px;
+      }
+      label.number {
+        width: 50px;
+      }
+      input {
+        width: inherit;
+        display: inline-block;
+      }
+      input.number {
+        width: 50px;
+        margin-right: 4px;
+      }
+      input.date {
+        width: 100px;
+      }
+      input.mobilisation {
+        width: inherit;
+      }
+      select {
+        display: inline-block;
+        width: inherit;
+      }
+    }
+  }
+}
+

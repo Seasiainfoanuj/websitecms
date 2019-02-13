@@ -1,0 +1,97 @@
+<%= render 'admin/shared/header' %>
+
+<div class="page-container row">
+  <%= render 'admin/shared/sidebar' %>
+
+  <div class="page-content">
+    <div class="content">
+      <div class="page-title">
+        <i class="fa fa-search"></i>
+        <h3>
+          <% if @count > 0 %>
+            Displaying <b><%= pluralize(@count, "search result") %></b> <%= "for: #{params[:search]}" if params[:search].present? %>
+          <% else %>
+            0 Search Results <%= "for: #{params[:search]}" if params[:search].present? %>
+          <% end %>
+        </h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 search-results">
+          <% if @vehicles.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Our Range</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/vehicles/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+
+          <% if @products.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Products</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/products/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+
+          <% if @pages.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Pages</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/pages/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+
+          <% if @posts.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Posts</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/posts/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+
+          <% if @users.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Users</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/users/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+
+          <% if @galleries.present? %>
+            <div class="grid simple">
+              <div class="grid-title no-border">
+                <h4>Feature Galleries</h4>
+              </div>
+
+              <div class="grid-body no-border">
+                <%= render "admin/galleries/table" %>
+              </div><!-- /grid-body -->
+            </div><!-- /grid -->
+          <% end %>
+        </div><%# /col-md-12 %>
+      </div><%# /row %>
+    </div><!-- /content -->
+  </div><!-- /page-content -->
+
+</div><!-- /page-container -->

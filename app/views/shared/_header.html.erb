@@ -1,0 +1,62 @@
+<div id="global-header" role="navigation">
+  <div id="global-search" role="search">
+    <div class="container">
+      <%= form_tag search_path, method: 'get', id: "gn-search-form", class: "global-search-form" do %>
+        <div class="global-search-input">
+          <%= text_field_tag :search, params[:search], class: "search-input", placeholder: "Search something...", autocomplete: "off", autocorrect: "off", autocapitalize: "off" %>
+        </div>
+        <%= submit_tag "Search", name: nil, class: "submit-btn" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+    <button type="button" class="global-nav-toggle">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <%= link_to "Bus 4x4 Group", root_path, id: 'global-brand' %>
+
+    <ul id="global-nav">
+      <li id="gn-home" class="gn-tab">
+        <%= link_to "Home", root_path %>
+      </li>
+
+      <li id="gn-about-us" class="gn-tab <%= 'active' if params[:slug] == 'about-us' %>">
+        <%= link_to "About Us", "/about-us" %>
+      </li>
+
+      <li id="gn-our-range" class="gn-tab">
+        <%= link_to "Our Range", root_path + "our-range" %>
+      </li>
+
+      <li id="gn-hire" class="gn-tab <%= 'active' if params[:slug] == 'hire' %>">
+        <%= link_to "Hire", root_path + "hire" %>
+      </li>
+
+      <li id="gn-servicing" id="name" class="gn-tab <%= 'active' if params[:slug] == 'servicing' %>">
+        <%= link_to "Servicing", root_path + "servicing" %>
+      </li>
+
+      <li id="gn-shop" class="gn-tab <%= 'active' if params[:controller] == 'store' %>">
+        <%= link_to "Shop", root_path + "shop/spare-parts", class: "disable-link" %>
+        <ul class="dropdown">
+          <li class="gn-dropdown-tab"><%= link_to "Spare Parts", root_path + "shop/spare-parts" %></li>
+          <li class="gn-dropdown-tab"><%= link_to "Second Hand Vehicles", root_path + "shop/second-hand-vehicles" %></li>
+          <li class="gn-dropdown-tab"><%= link_to "Accessories", root_path + "shop/accessories" %></li>
+          <li class="gn-dropdown-tab"><%= link_to "Merchandise", root_path + "shop/merchandise" %></li>
+        </ul>
+      </li>
+
+      <li id="gn-contact-us" class="gn-tab <%= 'active' if params[:slug] == 'contact-us' %>">
+        <%= link_to "Contact Us", root_path + "contact-us" %>
+      </li>
+    </ul>
+
+    <button type="button" class="gn-search-button enhanced">
+      <i class="gn-search-icon" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>

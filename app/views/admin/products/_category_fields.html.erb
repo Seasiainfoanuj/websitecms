@@ -1,0 +1,5 @@
+<div class="checkbox">
+  <%= check_box_tag "product[category_ids][]", category.id, product.categories.include?(category), id: "category_#{category.id}" %>
+  <%= label_tag "category_#{category.id}", category.name %>
+</div>
+<br>
