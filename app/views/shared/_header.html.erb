@@ -36,10 +36,6 @@
         <%= link_to "Hire", root_path + "hire" %>
       </li>
 
-      <li id="gn-servicing" id="name" class="gn-tab <%= 'active' if params[:slug] == 'servicing' %>">
-        <%= link_to "Servicing", root_path + "servicing" %>
-      </li>
-
       <li id="gn-shop" class="gn-tab <%= 'active' if params[:controller] == 'store' %>">
         <%= link_to "Shop", root_path + "shop/spare-parts", class: "disable-link" %>
         <ul class="dropdown">
